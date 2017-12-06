@@ -1,13 +1,11 @@
 import java.io.IOException;
 
 import processing.core.PApplet;
-import processing.core.PShape;
+//import processing.core.PShape;
 import processing.core.PVector;
 
 
 public class UrbanDecay extends PApplet{
-
-	//Particle[] field;
 	
 	float radx;   // Radius
 	float rady;
@@ -15,9 +13,13 @@ public class UrbanDecay extends PApplet{
 	float x;      // result
 	float y;
 	float minus = 0.05f;
-	final static int NUM_PARTICLE = 3000;
-	float bottom;
-	PShape city;
+	final static int NUM_PARTICLE = 1000;
+	final static int NUM_BUILDING = 10;
+	final static float ZOOM = 0.5f;		
+	float bottom = -PROJECTOR_RATIO/ZOOM;
+;
+	Building[] building = new Building[NUM_BUILDING];
+	Particle[] field = new Particle[NUM_PARTICLE];
 	
 	KinectBodyDataProvider kinectReader;
 	public static float PROJECTOR_RATIO = 1080f/1920.0f;
@@ -43,7 +45,6 @@ public class UrbanDecay extends PApplet{
 	public void setScale(float zoom) {
 		scale(zoom* width/2.0f, zoom * -width/2.0f);
 		translate(1f/zoom , -PROJECTOR_RATIO/zoom );		
-		bottom = -PROJECTOR_RATIO/zoom;
 	}
 
 	public void settings() {
@@ -71,61 +72,64 @@ public class UrbanDecay extends PApplet{
 		//kinectReader = new KinectBodyDataProvider(8008);
 		kinectReader.start();
 		
+		float x = 0.2f;
+		for(int i = 0; i < NUM_BUILDING; i++){
+			if(i <= 3)
+				building[i] = new Building(this, -2f + x, bottom, random(0.1f, .4f), random(0.2f, 0.7f)); 
+			else if(i <= 7)
+				building[i] = new Building(this, -2f + x, bottom, random(0.1f, .4f), random(0.5f, 1.5f)); 
+			else if(i <= 9)
+				building[i] = new Building(this, -2f + x, bottom, random(0.1f, .4f), random(0.2f, 0.7f));
+			else
+				building[i] = new Building(this, -2f + x, bottom, random(0.1f, .4f), random(0.2f, 0.4f));
+			x += 0.4f;
+		}
 		
-//		field = new Particle[NUM_PARTICLE];
-//		for (int i=0; i < NUM_PARTICLE; i++) {
-//			radx=random(0.1f);
-//			rady=random(0.1f);
-//			angle1= random(359);
-//			
-//			x=(radx*cos(radians(angle1))); //+width/2;
-//			y=(radx*sin(radians(angle1))); //+height/2;
-//			
-//			field[i] = new Particle(this,x,y,color(random(0,255),random(0,255),random(0,255)));
-//		 }
+		
+		for (int i=0; i < 100; i++) {
+			field[i] = new Particle(this, x, y, color(random(0,255),random(0,255),random(0,255)));
+		 }
 	}
 	
 	public void draw(){
-		setScale(.5f);
+		setScale(ZOOM);
 		
 		noStroke();
 		background(0);
 		
 		fill(150, 150, 150);
-		drawBuilding(-1.8f, 0.6f, 0.2f);
-		drawBuilding(-1.4f, 0.73f, 0.35f);
-		drawBuilding(-0.9f, 1.1f, 0.15f);
-		drawBuilding(-.5f, 1.6f, 0.25f);
-		drawBuilding(.2f, 0.73f, 0.45f);
-		drawBuilding(.8f, 0.86f, 0.15f);
-		drawBuilding(1.4f, 0.73f, 0.2f);
+//		drawBuilding(-1.8f, 0.6f, 0.2f);
+//		drawBuilding(-1.4f, 0.73f, 0.35f);
+//		drawBuilding(-0.9f, 1.1f, 0.15f);
+//		drawBuilding(-.5f, 1.6f, 0.25f);
+//		drawBuilding(.2f, 0.73f, 0.45f);
+//		drawBuilding(.8f, 0.86f, 0.15f);
+//		drawBuilding(1.4f, 0.73f, 0.2f);
 		
 		fill(255, 255, 255);
 		//ground
 		rect(-2f, bottom, 4f, 0.1f);
 		//white buildings
-		drawBuilding(-1.9f, 0.4f, 0.2f);
-		drawBuilding(-1.6f, 0.5f, 0.18f);
-		drawBuilding(-1.36f, 0.35f, 0.4f);
-		drawBuilding(-0.8f, 0.7f, 0.24f);
-		drawBuilding(-0.76f, 0.83f, 0.16f);
-		drawBuilding(-0.52f, 0.5f, 0.2f);
-		drawBuilding(-0.69f, 1f, 0.02f);
-		drawBuilding(-0.2f, 0.67f, 0.13f);
-		drawBuilding(0, 1.1f, 0.35f);
-		drawBuilding(0.5f, 0.3f, 0.8f);
-		drawBuilding(0.9f, 0.6f, 0.45f);
-		drawBuilding(1.5f, 0.25f, 0.2f);
+		for(int i = 0; i < NUM_BUILDING; i++){
+			building[i].draw();
+		}
+		
+//		drawBuilding(-1.9f, 0.4f, 0.2f);
+//		drawBuilding(-1.6f, 0.5f, 0.18f);
+//		drawBuilding(-1.36f, 0.35f, 0.4f);
+//		drawBuilding(-0.8f, 0.7f, 0.24f);
+//		drawBuilding(-0.76f, 0.83f, 0.16f);
+//		drawBuilding(-0.52f, 0.5f, 0.2f);
+//		drawBuilding(-0.69f, 1f, 0.02f);
+//		drawBuilding(-0.2f, 0.67f, 0.13f);
+//		drawBuilding(0, 1.1f, 0.35f);
+//		drawBuilding(0.5f, 0.3f, 0.8f);
+//		drawBuilding(0.9f, 0.6f, 0.45f);
+//		drawBuilding(1.5f, 0.25f, 0.2f);
 		
 	    //rect(x,y+20,5,50);
 	    
 		//shape(city, -2f, bottom);
-
-		System.out.println();
-		// leave trails instead of clearing background \ 
-		//noStroke();
-		//fill(0,0,0, 10);
-		//rect(-1,-1, 2, 2); //draw transparent rect of the window
 
 //		KinectBodyData bodyData = kinectReader.getMostRecentData();
 		KinectBodyData bodyData = kinectReader.getData();
@@ -143,7 +147,7 @@ public class UrbanDecay extends PApplet{
 
 			fill(255,255,255);
 			noStroke();
-			//drawIfValid(head);
+			drawIfValid(head);
 //			drawIfValid(spine);
 //			drawIfValid(spineBase);
 //			drawIfValid(shoulderLeft);
@@ -199,30 +203,7 @@ public class UrbanDecay extends PApplet{
 //						);
 //			}
 		}
-	}
-
-	
-	public void drawBuilding(float x, float height, float width){
-		beginShape();
-		vertex(x, bottom);
-		vertex(x, bottom + height);
-		vertex(x + width, bottom + height);
-		vertex(x + width, bottom);
-		endShape(CLOSE);
-	}
-	
-//	public void initCity(){
-//		fill(255, 255, 255);
-//
-//		beginShape();
-//		vertex(0,0);
-//		vertex(0,1f);
-//		vertex(1f,1f);
-//		vertex(1f,0);
-//		endShape(CLOSE);
-//			
-//	}
-	
+	}	
 	
 	/**
 	 * Draws an ellipse in the x,y position of the vector (it ignores z).
@@ -240,7 +221,5 @@ public class UrbanDecay extends PApplet{
 	public static void main(String[] args) {
 		PApplet.main(UrbanDecay.class.getName());
 	}
-
-	
 	
 }
