@@ -13,12 +13,7 @@ public class UrbanDecay extends PApplet{
 	float x;      // result
 	float y;
 	float minus = 0.05f;
-<<<<<<< HEAD
-	final static int NUM_PARTICLE = 3000;
-	float bottom;
-	PShape city;
 	Umbrella umbrella;
-=======
 	final static int NUM_PARTICLE = 1000;
 	final static int NUM_BUILDING = 10;
 	final static float ZOOM = 0.5f;		
@@ -26,8 +21,7 @@ public class UrbanDecay extends PApplet{
 ;
 	Building[] building = new Building[NUM_BUILDING];
 	Particle[] field = new Particle[NUM_PARTICLE];
->>>>>>> origin/master
-	
+
 	KinectBodyDataProvider kinectReader;
 	public static float PROJECTOR_RATIO = 1080f/1920.0f;
 	
@@ -117,20 +111,7 @@ public class UrbanDecay extends PApplet{
 		//ground
 		rect(-2f, bottom, 4f, 0.1f);
 		//white buildings
-<<<<<<< HEAD
-		drawBuilding(-1.9f, 0.4f, 0.2f);
-		drawBuilding(-1.6f, 0.5f, 0.18f);
-		drawBuilding(-1.36f, 0.35f, 0.4f);
-		drawBuilding(-0.8f, 0.7f, 0.24f);
-		drawBuilding(-0.76f, 0.83f, 0.16f);
-		drawBuilding(-0.52f, 0.5f, 0.2f);
-		drawBuilding(-0.69f, 1f, 0.02f);
-		drawBuilding(-0.2f, 0.67f, 0.13f);
-		drawBuilding(0, 1.1f, 0.35f);
-		drawBuilding(0.5f, 0.3f, 0.8f);
-		drawBuilding(0.9f, 0.6f, 0.45f);
-		drawBuilding(1.5f, 0.25f, 0.2f);
-=======
+
 		for(int i = 0; i < NUM_BUILDING; i++){
 			building[i].draw();
 		}
@@ -151,7 +132,7 @@ public class UrbanDecay extends PApplet{
 	    //rect(x,y+20,5,50);
 	    
 		//shape(city, -2f, bottom);
->>>>>>> origin/master
+
 
 //		KinectBodyData bodyData = kinectReader.getMostRecentData();
 		KinectBodyData bodyData = kinectReader.getData();
@@ -169,17 +150,13 @@ public class UrbanDecay extends PApplet{
 
 			fill(255,255,255);
 			noStroke();
-<<<<<<< HEAD
-			
 			umbrella = new Umbrella (this, 0.5f, head);
 			if (head != null){
 				umbrella.drawUmbrella();
 			}
 			
-//			drawIfValid(head);
-=======
 			drawIfValid(head);
->>>>>>> origin/master
+
 //			drawIfValid(spine);
 //			drawIfValid(spineBase);
 //			drawIfValid(shoulderLeft);
