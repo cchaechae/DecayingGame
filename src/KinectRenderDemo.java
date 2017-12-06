@@ -12,6 +12,8 @@ public class KinectRenderDemo extends PApplet {
 
 	KinectBodyDataProvider kinectReader;
 	public static float PROJECTOR_RATIO = 1080f/1920.0f;
+	
+	
 
 	public void createWindow(boolean useP2D, boolean isFullscreen, float windowsScale) {
 		if (useP2D) {
@@ -59,9 +61,6 @@ public class KinectRenderDemo extends PApplet {
 		setScale(.5f);
 		
 		noStroke();
-
-
-
 		background(200,200,200);
 
 		// leave trails instead of clearing background \ 
