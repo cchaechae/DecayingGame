@@ -18,6 +18,7 @@ public class UrbanDecay extends PApplet{
 	final static int NUM_PARTICLE = 3000;
 	float bottom;
 	PShape city;
+	Umbrella umbrella;
 	
 	KinectBodyDataProvider kinectReader;
 	public static float PROJECTOR_RATIO = 1080f/1920.0f;
@@ -64,7 +65,7 @@ public class UrbanDecay extends PApplet{
 		 */
 		
 		try {
-			kinectReader = new KinectBodyDataProvider("test.kinect", 10);
+			kinectReader = new KinectBodyDataProvider("exitTest.kinect", 10);
 		} catch (IOException e) {
 			System.out.println("Unable to creat e kinect producer");
 		}
@@ -116,10 +117,6 @@ public class UrbanDecay extends PApplet{
 		drawBuilding(0.5f, 0.3f, 0.8f);
 		drawBuilding(0.9f, 0.6f, 0.45f);
 		drawBuilding(1.5f, 0.25f, 0.2f);
-		
-	    //rect(x,y+20,5,50);
-	    
-		//shape(city, -2f, bottom);
 
 		System.out.println();
 		// leave trails instead of clearing background \ 
@@ -143,7 +140,13 @@ public class UrbanDecay extends PApplet{
 
 			fill(255,255,255);
 			noStroke();
-			//drawIfValid(head);
+			
+			umbrella = new Umbrella (this, 0.5f, head);
+			if (head != null){
+				umbrella.drawUmbrella();
+			}
+			
+//			drawIfValid(head);
 //			drawIfValid(spine);
 //			drawIfValid(spineBase);
 //			drawIfValid(shoulderLeft);
@@ -236,6 +239,7 @@ public class UrbanDecay extends PApplet{
 		}
 
 	}
+	
 
 	public static void main(String[] args) {
 		PApplet.main(UrbanDecay.class.getName());
