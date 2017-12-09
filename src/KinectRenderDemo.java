@@ -112,8 +112,6 @@ public class KinectRenderDemo extends PApplet {
 						handRight.x, handRight.y,
 						footRight.x, footRight.y
 						);
-
-
 			}
 
 		}
