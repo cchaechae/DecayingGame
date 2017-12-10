@@ -9,6 +9,12 @@ public class Rain {
 	int y2;
 	int vel;
 	int s;
+	float centerX;
+	float centerY;
+	float radius;
+	
+	boolean umbrella = false;
+	
 
 	public Rain(PApplet app, int x, int y, int sp) {
 
@@ -19,7 +25,7 @@ public class Rain {
 		this.app = app;
 	}
 
-	public void draw(int excludeRangeX1,int excludeRangeX2, int excludeY) {
+	public void draw( ) {
 
 		int mx = 0;
 		if (mx <= 0) {
@@ -31,7 +37,13 @@ public class Rain {
 		y2 = y + 50;
 
 		app.stroke(200);
-		drawRainDrop(excludeRangeX1,excludeRangeX2, excludeY);
+		if(umbrella){
+			drawRain();
+		}
+		else{
+			app.line(x, y, x2, y2);
+		}
+		
 		
 		if (y >= app.height - 100) {
 			app.noFill();
@@ -42,16 +54,38 @@ public class Rain {
 
 	}
 
-	public void drawRainDrop(int x1, int x3, int posY) {
-		if (x > x1 && x < x3) {
-			if (y <= posY) {
-				app.line(x, y, x2, y2);
-			} 
+	
+	public void drawRain(){
+		if(Math.abs(calculateDist(centerX,x2,centerY,y2)) >= radius/2  ){
+			if (x > centerX - radius/2 && x < centerX + radius/2) {
+				if (y <= centerY) {
+					app.line(x, y, x2, y2);
+				} 
 
+			}
+			else {
+				app.line(x, y, x2, y2);
+			}
 		}
-		else {
-			app.line(x, y, x2, y2);
-		}
+	}
+	
+	public double calculateDist(float x1, int x2, float y1, int y2){
+		double diffX =(x2 - x1)*(x2 - x1);
+		double diffY = (y2 - y1)*(y2 - y1);
+		double distSquare = diffX + diffY;
+		
+		return Math.sqrt(distSquare);
+	}
+	
+	
+	public void isUmbrella(boolean found){
+		umbrella = found;
+	}
+	
+	public void setUmbrellaDimensions(float x3,float y3, float f){
+		this.centerX = x3;
+		this.centerY =  y3;
+		this.radius = f;
 	}
 
 	public int getX() {
