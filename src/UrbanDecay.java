@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import processing.core.PApplet;
 //import processing.core.PShape;
@@ -13,12 +15,15 @@ public class UrbanDecay extends PApplet{
 	float x;      // result
 	float y;
 	float minus = 0.05f;
-	Umbrella umbrella;
+//	Umbrella umbrella;
 	final static int NUM_PARTICLE = 1000;
 	final static int NUM_BUILDING = 10;
 	final static float ZOOM = 0.5f;		
 	float bottom = -PROJECTOR_RATIO/ZOOM;
-;
+
+	PersonTracker tracker = new PersonTracker();
+	HashMap<Long, Umbrella> umbrellas = new HashMap<Long, Umbrella>();
+	
 	Building[] building = new Building[NUM_BUILDING];
 	Particle[] field = new Particle[NUM_PARTICLE];
 
@@ -99,6 +104,8 @@ public class UrbanDecay extends PApplet{
 		background(0);
 		
 		fill(150, 150, 150);
+		
+		int numPpl = 0;
 //		drawBuilding(-1.8f, 0.6f, 0.2f);
 //		drawBuilding(-1.4f, 0.73f, 0.35f);
 //		drawBuilding(-0.9f, 1.1f, 0.15f);
@@ -136,26 +143,47 @@ public class UrbanDecay extends PApplet{
 
 //		KinectBodyData bodyData = kinectReader.getMostRecentData();
 		KinectBodyData bodyData = kinectReader.getData();
-		Body person = bodyData.getPerson(0);
-		if(person != null){
-			PVector head = person.getJoint(Body.HEAD);
-			PVector spine = person.getJoint(Body.SPINE_SHOULDER);
-			PVector spineBase = person.getJoint(Body.SPINE_BASE);
-			PVector shoulderLeft = person.getJoint(Body.SHOULDER_LEFT);
-			PVector shoulderRight = person.getJoint(Body.SHOULDER_RIGHT);
-			PVector footLeft = person.getJoint(Body.FOOT_LEFT);
-			PVector footRight = person.getJoint(Body.FOOT_RIGHT);
-			PVector handLeft = person.getJoint(Body.HAND_LEFT);
-			PVector handRight = person.getJoint(Body.HAND_RIGHT);
-
-			fill(255,255,255);
-			noStroke();
-			umbrella = new Umbrella (this, 0.5f, head);
-			if (head != null){
-				umbrella.drawUmbrella();
+		tracker.update(bodyData);
+		
+		for (Long id: tracker.getEnters()){
+			Umbrella umbrella =  new Umbrella(this);
+			umbrellas.put(id, umbrella);
+		}
+		
+		for (Long id: tracker.getExits()){
+			umbrellas.remove(id);
+		}
+		
+		for (Body b: tracker.getPeople().values()){
+			Umbrella u = umbrellas.get(b.getId());
+			numPpl++;
+			System.out.println("detected: " + numPpl);
+			if (u != null){
+				u.update(b);
+				u.drawUmbrella(numPpl);
 			}
-			
-			drawIfValid(head);
+		}
+		
+		
+//		if(person != null){
+//			PVector head = person.getJoint(Body.HEAD);
+//			PVector neck = person.getJoint(Body.NECK);
+//			PVector spine = person.getJoint(Body.SPINE_SHOULDER);
+//			PVector spineBase = person.getJoint(Body.SPINE_BASE);
+//			PVector shoulderLeft = person.getJoint(Body.SHOULDER_LEFT);
+//			PVector shoulderRight = person.getJoint(Body.SHOULDER_RIGHT);
+//			PVector footLeft = person.getJoint(Body.FOOT_LEFT);
+//			PVector footRight = person.getJoint(Body.FOOT_RIGHT);
+//			PVector handLeft = person.getJoint(Body.HAND_LEFT);
+//			PVector handRight = person.getJoint(Body.HAND_RIGHT);
+
+//			fill(255,255,255);
+//			noStroke();
+//			Umbrella umbrella = new Umbrella (this, 0.5f, head, neck);
+//			if (head != null){
+//				umbrella.drawUmbrella(1);
+//			}
+//		}
 
 //			drawIfValid(spine);
 //			drawIfValid(spineBase);
@@ -211,7 +239,6 @@ public class UrbanDecay extends PApplet{
 //						footRight.x, footRight.y
 //						);
 //			}
-		}
 	}	
 	
 	/**
