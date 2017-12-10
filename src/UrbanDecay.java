@@ -22,9 +22,10 @@ public class UrbanDecay extends PApplet {
 
 	final static float ZOOM = 0.5f;
 
-	float bottom = -PROJECTOR_RATIO / ZOOM;
 
-	PersonTracker tracker = new PersonTracker();
+
+	float bottom = -PROJECTOR_RATIO / ZOOM;
+	PersonTracker tracker=new PersonTracker();
 	HashMap<Long, Umbrella> umbrellas = new HashMap<Long, Umbrella>();
 
 	Building[] building = new Building[NUM_BUILDING];
@@ -33,7 +34,7 @@ public class UrbanDecay extends PApplet {
 	Building[] whiteBuilding = new Building[NUM_WHITE_BUILDING];
 	Building[] greyBuilding = new Building[NUM_GREY_BUILDING];
 	Building[] darkBuilding = new Building[NUM_DARK_BUILDING];
-	boolean umbrella = false;
+	boolean found = false;
 
 	KinectBodyDataProvider kinectReader;
 	Rain[] rain;
@@ -91,26 +92,26 @@ public class UrbanDecay extends PApplet {
 		for (int i = 0; i < 25; i++) {
 
 			rain[i] = new Rain(this, (int) random(0, 240), (int) random(0, this.height), (int) random(2, 4));
-			
+
 		}
 
 		for (int i = 0; i < 100; i++) {
 
 			rainOne[i] = new Rain(this, (int) random(240, 480), (int) random(0, this.height), (int) random(2, 4));
-			
+
 		}
 
 		for (int i = 0; i < 10; i++) {
 
 			rainTwo[i] = new Rain(this, (int) random(480, 720), (int) random(0, this.height), (int) random(2, 4));
-			
+
 		}
 
 		for (int i = 0; i < 200; i++) {
 
 			rainThree[i] = new Rain(this, (int) random(720, this.width), (int) random(0, this.height),
 					(int) random(2, 4));
-			rainThree[i].isUmbrella(umbrella );
+			rainThree[i].isUmbrella(found);
 		}
 
 		// white buildings
@@ -178,7 +179,12 @@ public class UrbanDecay extends PApplet {
 	
 
 		setScale(ZOOM);
+
 		strokeWeight(0.5f);
+
+
+		
+		background(0);
 
 		fill(150, 150, 150);
 
@@ -225,13 +231,18 @@ public class UrbanDecay extends PApplet {
 			whiteBuilding[i].drawParticle();
 		}
 
+
 		// KinectBodyData bodyData = kinectReader.getMostRecentData();
 		KinectBodyData bodyData = kinectReader.getData();
 		tracker.update(bodyData);
 
-		// detecting multiple users
-		for (Long id : tracker.getEnters()) {
-			Umbrella umbrella = new Umbrella(this);
+		
+		tracker.update(bodyData);
+		
+		//detecting multiple users
+		for (Long id: tracker.getEnters()){
+			Umbrella umbrella =  new Umbrella(this);
+
 			umbrellas.put(id, umbrella);
 		}
 
@@ -242,35 +253,39 @@ public class UrbanDecay extends PApplet {
 		for (Body b : tracker.getPeople().values()) {
 			Umbrella u = umbrellas.get(b.getId());
 			numPpl++;
-			if (u != null) {
+
+			if (u != null){
+
 				u.update(b);
 				u.drawUmbrella(numPpl);
-				umbrella = true;
+				found = true;
 				for (int i = 0; i < 25; i++) {
-					rain[i].isUmbrella(umbrella );
+					rain[i].isUmbrella(found );
 					rain[i].setUmbrellaDimensions(b.getJoint(Body.HEAD).x,b.getJoint(Body.HEAD).y, 0.5f);
 				}
 				for (int i = 0; i < 100; i++) {
-					rainOne[i].isUmbrella(umbrella );
+					rainOne[i].isUmbrella(found );
 					rainOne[i].setUmbrellaDimensions(b.getJoint(Body.HEAD).x,b.getJoint(Body.HEAD).y, 0.5f);
 				}
 				for (int i = 0; i < 10; i++) {
-					rainTwo[i].isUmbrella(umbrella );
+					rainTwo[i].isUmbrella(found );
 					rainTwo[i].setUmbrellaDimensions(b.getJoint(Body.HEAD).x,b.getJoint(Body.HEAD).y, 0.5f);
 				}
 				for (int i = 0; i < 200; i++) {
-					rainThree[i].isUmbrella(umbrella );
+					rainThree[i].isUmbrella(found );
 					rainThree[i].setUmbrellaDimensions(b.getJoint(Body.HEAD).x,b.getJoint(Body.HEAD).y, 0.5f);
 				}
 
 				
+			
 			}
-		}
 
 		
 		
+		}
+		}
 		
-	}
+	
 
 	/**
 	 * Draws an ellipse in the x,y position of the vector (it ignores z). Will
