@@ -13,30 +13,24 @@ public class UrbanDecay extends PApplet{
 	float angle1; // angle
 	float x;      // result
 	float y;
-<<<<<<< HEAD
 	float minus = 0.05f;
 //	Umbrella umbrella;
 	final static int NUM_PARTICLE = 1000;
 	final static int NUM_BUILDING = 10;
-=======
 	
 	final static int NUM_WHITE_BUILDING = 14;
 	final static int NUM_GREY_BUILDING = 13;
 	final static int NUM_DARK_BUILDING = 6;
 	
->>>>>>> origin/master
 	final static float ZOOM = 0.5f;		
 	
 	float bottom = -PROJECTOR_RATIO/ZOOM;
-<<<<<<< HEAD
 
 	PersonTracker tracker = new PersonTracker();
 	HashMap<Long, Umbrella> umbrellas = new HashMap<Long, Umbrella>();
 	
 	Building[] building = new Building[NUM_BUILDING];
 	Particle[] field = new Particle[NUM_PARTICLE];
-=======
->>>>>>> origin/master
 
 	Building[] whiteBuilding = new Building[NUM_WHITE_BUILDING];
 	Building[] greyBuilding = new Building[NUM_GREY_BUILDING];
@@ -75,7 +69,7 @@ public class UrbanDecay extends PApplet{
 	public void setup(){
 		
 		try {
-			kinectReader = new KinectBodyDataProvider("test.kinect", 10);
+			kinectReader = new KinectBodyDataProvider("exitTest.kinect", 10);
 		} catch (IOException e) {
 			System.out.println("Unable to creat e kinect producer");
 		}
@@ -127,22 +121,9 @@ public class UrbanDecay extends PApplet{
 		setScale(ZOOM);
 		
 		background(0);
-<<<<<<< HEAD
-		
 		fill(150, 150, 150);
 		
 		int numPpl = 0;
-//		drawBuilding(-1.8f, 0.6f, 0.2f);
-//		drawBuilding(-1.4f, 0.73f, 0.35f);
-//		drawBuilding(-0.9f, 1.1f, 0.15f);
-//		drawBuilding(-.5f, 1.6f, 0.25f);
-//		drawBuilding(.2f, 0.73f, 0.45f);
-//		drawBuilding(.8f, 0.86f, 0.15f);
-//		drawBuilding(1.4f, 0.73f, 0.2f);
-=======
-		noStroke();
->>>>>>> origin/master
-		
 		fill(255, 255, 255);
 		//ground
 		rect(-2f, bottom, 4f, 0.1f);
@@ -189,11 +170,11 @@ public class UrbanDecay extends PApplet{
 		}			
 
 
-		//		KinectBodyData bodyData = kinectReader.getMostRecentData();
+		//KinectBodyData bodyData = kinectReader.getMostRecentData();
 		KinectBodyData bodyData = kinectReader.getData();
-<<<<<<< HEAD
 		tracker.update(bodyData);
 		
+		//detecting multiple users
 		for (Long id: tracker.getEnters()){
 			Umbrella umbrella =  new Umbrella(this);
 			umbrellas.put(id, umbrella);
@@ -206,7 +187,6 @@ public class UrbanDecay extends PApplet{
 		for (Body b: tracker.getPeople().values()){
 			Umbrella u = umbrellas.get(b.getId());
 			numPpl++;
-			System.out.println("detected: " + numPpl);
 			if (u != null){
 				u.update(b);
 				u.drawUmbrella(numPpl);
@@ -214,90 +194,6 @@ public class UrbanDecay extends PApplet{
 		}
 		
 		
-//		if(person != null){
-//			PVector head = person.getJoint(Body.HEAD);
-//			PVector neck = person.getJoint(Body.NECK);
-=======
-		Body person = bodyData.getPerson(0);
-		if(person != null){
-//			PVector head = person.getJoint(Body.HEAD);
->>>>>>> origin/master
-//			PVector spine = person.getJoint(Body.SPINE_SHOULDER);
-//			PVector spineBase = person.getJoint(Body.SPINE_BASE);
-//			PVector shoulderLeft = person.getJoint(Body.SHOULDER_LEFT);
-//			PVector shoulderRight = person.getJoint(Body.SHOULDER_RIGHT);
-//			PVector footLeft = person.getJoint(Body.FOOT_LEFT);
-//			PVector footRight = person.getJoint(Body.FOOT_RIGHT);
-//			PVector handLeft = person.getJoint(Body.HAND_LEFT);
-//			PVector handRight = person.getJoint(Body.HAND_RIGHT);
-
-//			fill(255,255,255);
-//			noStroke();
-<<<<<<< HEAD
-//			Umbrella umbrella = new Umbrella (this, 0.5f, head, neck);
-//			if (head != null){
-//				umbrella.drawUmbrella(1);
-//			}
-//		}
-
-//			drawIfValid(spine);
-//			drawIfValid(spineBase);
-//			drawIfValid(shoulderLeft);
-//			drawIfValid(shoulderRight);
-//			drawIfValid(footLeft);
-//			drawIfValid(footRight);
-//			drawIfValid(handLeft);
-//			drawIfValid(handRight);
-
-//			if(head != null){
-//				for (int i=0; i < NUM_PARTICLE; i++) {
-//					if(!field[i].clicked){
-//						field[i].update(field[i].location.x+head.x, field[i].location.y+head.y);
-//						field[i].draw();
-//						field[i].update(field[i].location.x-head.x, field[i].location.y-head.y);
-//						System.out.println(field[i].location.x);
-//					}
-//					else{
-//						field[i].falling();
-//					}
-//										
-//					System.out.println(field[i].location.x);
-//				}
-//			}
-//			
-//			if(mousePressed){
-//				for(int i=0; i < field.length; i++){
-//					if(field[i].location.y < head.y+0.05f){
-//						System.out.println(field[i].location.y);
-//						System.out.println(head.y+0.05f);
-//						
-//						field[i].mouseClicked();
-//					}
-//				}
-//				//minus = minus - 0.001f;
-//			}
-
-			
-//			if( 
-//					(footRight != null) &&
-//					(footLeft != null) &&
-//					(handLeft != null) &&
-//					(handRight != null) 
-//					) {
-//				stroke(255,0,0, 100);
-//				noFill();
-//				strokeWeight(.05f); // because of scale weight needs to be much thinner
-//				curve(
-//						footLeft.x, footLeft.y, 
-//						handLeft.x, handLeft.y, 
-//						handRight.x, handRight.y,
-//						footRight.x, footRight.y
-//						);
-//			}
-=======
-//			drawIfValid(head);
-		}
->>>>>>> origin/master
 	}	
 	
 	/**

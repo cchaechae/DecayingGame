@@ -23,7 +23,7 @@ public class Umbrella {
 		colorPalette[3] = app.color(98, 164, 216);
 		
 		//stick color
-		colorPalette[0] = app.color(97, 20, 124);
+		colorPalette[0] = app.color(63, 31, 142);
 	}
 	
 	public void update(Body body){
@@ -39,22 +39,33 @@ public class Umbrella {
 		
 		determineSize();
 		
+		//draw Umbrella body
 		app.stroke(colorPalette[pplNum]);
 		app.fill(colorPalette[pplNum]);
-		app.line(head.x, head.y + radius , head.x, head.y + radius + 0.03f);
 		app.arc(head.x, head.y, size, size, 0, app.HALF_PI+app.HALF_PI);
-		//size: width and height
 		
+		//draw Umbrella tip
+		app.line(head.x, head.y + radius , head.x, head.y + radius + 0.02f);
 		
-		app.stroke(colorPalette[0]);
-		app.strokeWeight(0.02f);
+		//draw Umbrella handle
+		app.stroke(colorPalette[pplNum]);
+		app.strokeWeight(0.015f);
 		app.line(head.x, head.y, head.x , neck.y);
-		
-//		app.beginShape();
-//		app.vertex(neck.x, neck.y);
-//		app.bezierVertex(neck.x - 0.05f, neck.y - 0.05f, neck.x - 0.1f, neck.y - 0.05f, neck.x, neck.y);
-//		app.endShape();
 
+		//draw Umbrella lines
+		app.stroke(colorPalette[0]);
+		app.strokeWeight(0.01f);
+		float umpTop = head.y + radius;
+		float divide = size/4;
+		app.line(head.x, umpTop, head.x + divide, head.y);
+		app.line(head.x, umpTop, head.x - divide, head.y);
+//		app.beginShape();
+//		head.x = head.x - 0.5f;
+//		head.y = head.y - 0.5f;
+//		app.vertex(head.x, head.y);
+//		app.bezierVertex(head.x, head.y, head.x + 50, head.y+50, head.x + 50, head.y+50);
+//		app.endShape();
+		
 		}
 		
 	}
