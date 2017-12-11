@@ -34,6 +34,7 @@ public class Umbrella {
 	}
 	
 	public float getX(){
+		
 		return head.x;
 	}
 	public float getY(){
