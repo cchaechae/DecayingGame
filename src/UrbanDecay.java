@@ -81,8 +81,7 @@ public class UrbanDecay extends PApplet {
 		// kinectReader = new KinectBodyDataProvider(8008);
 		kinectReader.start();
 
-		// float[] buildingX =
-		// {-1.55f,1.3f,-0.95f,-0.9f,-0.6f,-0.4f,-0.161f,0f,0.079f,0.18f,0.35f,0.8f,1.25f,1.43f};
+		
 		// rain
 		rain = new Rain[25];
 		rainOne = new Rain[100];
@@ -91,27 +90,26 @@ public class UrbanDecay extends PApplet {
 
 		for (int i = 0; i < 25; i++) {
 
-			rain[i] = new Rain(this, (int) random(0, 240), (int) random(0, this.height), (int) random(2, 4));
+			rain[i] = new Rain(this,  random(-2f, -1f),random(0, 1.5f), random(0.2f, 0.4f));
 
 		}
 
 		for (int i = 0; i < 100; i++) {
 
-			rainOne[i] = new Rain(this, (int) random(240, 480), (int) random(0, this.height), (int) random(2, 4));
+			rainOne[i] = new Rain(this, random(-1f, 0f),  random(0, 1.5f),random(0.2f, 0.4f));
 
 		}
 
 		for (int i = 0; i < 10; i++) {
 
-			rainTwo[i] = new Rain(this, (int) random(480, 720), (int) random(0, this.height), (int) random(2, 4));
+			rainTwo[i] = new Rain(this,  random(0f, 1f),  random(0, 1.5f),  random(0.2f, 0.4f));
 
 		}
 
 		for (int i = 0; i < 200; i++) {
 
-			rainThree[i] = new Rain(this, (int) random(720, this.width), (int) random(0, this.height),
-					(int) random(2, 4));
-			rainThree[i].isUmbrella(found);
+			rainThree[i] = new Rain(this,  random(1f, 2f), random(0, 1.5f),
+					random(0.2f, 0.4f));
 		}
 
 		// white buildings
@@ -159,7 +157,7 @@ public class UrbanDecay extends PApplet {
 	public void draw() {
 		background(0);
 		strokeWeight(1);
-
+		setScale(ZOOM);
 		for (int i = 0; i < 25; i++) {
 			rain[i].draw();
 			
@@ -178,19 +176,17 @@ public class UrbanDecay extends PApplet {
 		}
 	
 
-		setScale(ZOOM);
-
-		strokeWeight(0.5f);
-
-
 		
-		background(0);
+
+		//strokeWeight(0.5f);
+
 
 		fill(150, 150, 150);
 
 		int numPpl = 0;
 		fill(255, 255, 255);
 		// ground
+		noStroke();
 		rect(-2f, bottom, 4f, 0.1f);
 
 		fill(50, 50, 50);
@@ -236,8 +232,7 @@ public class UrbanDecay extends PApplet {
 		KinectBodyData bodyData = kinectReader.getData();
 		tracker.update(bodyData);
 
-		
-		tracker.update(bodyData);
+	
 		
 		//detecting multiple users
 		for (Long id: tracker.getEnters()){

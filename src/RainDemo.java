@@ -92,13 +92,14 @@ public class RainDemo extends PApplet{
 			
 	public void draw(){
 		
-		
+		setScale(0.5f);
 		
 		background(0);
 		
 		
 		fill(204, 102, 0);
-		arc(300, 400, 250, 250, PI,2*PI);
+		
+		arc(0f, 0f, 0.5f, 0.5f, PI,2*PI);
 		
 	
 		

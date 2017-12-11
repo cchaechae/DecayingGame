@@ -2,13 +2,13 @@ import processing.core.PApplet;
 
 public class Rain {
 
-	int x;
-	int y;
+	float x;
+	float y;
 	PApplet app;
-	int x2;
-	int y2;
-	int vel;
-	int s;
+	float x2;
+	float y2;
+	float vel;
+	float s;
 	float centerX;
 	float centerY;
 	float radius;
@@ -16,7 +16,7 @@ public class Rain {
 	boolean umbrella = false;
 	
 
-	public Rain(PApplet app, int x, int y, int sp) {
+	public Rain(PApplet app, float x, float y, float sp) {
 
 		this.x = x;
 		this.y = y;
@@ -27,17 +27,22 @@ public class Rain {
 
 	public void draw( ) {
 
-		int mx = 0;
+		float mx = 0;
 		if (mx <= 0) {
-			mx = 2;
+			mx = 0.2f;
 		}
 
-		y = y + s * mx;
+		y = y - s*mx ;
+	
+		System.out.println(y);
+		
 		x2 = x;
-		y2 = y + 50;
+		y2 = y + 0.3f;
 
 		app.stroke(200);
+		app.strokeWeight(0.005f);
 		if(umbrella){
+			System.out.println("umbrella found");
 			drawRain();
 		}
 		else{
@@ -45,11 +50,11 @@ public class Rain {
 		}
 		
 		
-		if (y >= app.height - 100) {
+		if (y <= -1.5f) {
 			app.noFill();
-			app.stroke(200);
-			app.ellipse(x, app.height - app.random(50, 70), app.random(25, 100), 10);
-			y = -120;
+			//app.stroke(200);
+			///app.ellipse(x, app.height - app.random(50, 70), app.random(25, 100), 10);
+			y = 1.5f;
 		}
 
 	}
@@ -61,6 +66,7 @@ public class Rain {
 				if (y <= centerY) {
 					app.line(x, y, x2, y2);
 				} 
+				
 
 			}
 			else {
@@ -69,12 +75,12 @@ public class Rain {
 		}
 	}
 	
-	public double calculateDist(float x1, int x2, float y1, int y2){
-		double diffX =(x2 - x1)*(x2 - x1);
-		double diffY = (y2 - y1)*(y2 - y1);
-		double distSquare = diffX + diffY;
+	public float calculateDist(float x1, float x2, float y1, float y2){
+		float diffX =(x2 - x1)*(x2 - x1);
+		float diffY = (y2 - y1)*(y2 - y1);
+		float distSquare = diffX + diffY;
 		
-		return Math.sqrt(distSquare);
+		return (float) Math.sqrt(distSquare);
 	}
 	
 	
@@ -88,11 +94,11 @@ public class Rain {
 		this.radius = f;
 	}
 
-	public int getX() {
+	public float getX() {
 		return x2;
 	}
 
-	public int getY() {
+	public float getY() {
 		return y2;
 	}
 
