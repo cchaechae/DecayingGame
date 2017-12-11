@@ -37,12 +37,12 @@ public class Rain {
 		System.out.println(y);
 		
 		x2 = x;
-		y2 = y + 0.3f;
+		y2 = y + 0.15f;
 
 		app.stroke(200);
 		app.strokeWeight(0.005f);
 		if(umbrella){
-			System.out.println("umbrella found");
+			
 			drawRain();
 		}
 		else{
@@ -63,7 +63,7 @@ public class Rain {
 	public void drawRain(){
 		if(Math.abs(calculateDist(centerX,x2,centerY,y2)) >= radius/2  ){
 			if (x > centerX - radius/2 && x < centerX + radius/2) {
-				if (y <= centerY) {
+				if (y2  >= centerY + 0.32f ) {
 					app.line(x, y, x2, y2);
 				} 
 				

@@ -33,6 +33,13 @@ public class Umbrella {
 		neck = body.getJoint(Body.NECK);
 	}
 	
+	public float getX(){
+		return head.x;
+	}
+	public float getY(){
+		return head.y;
+	}
+	
 	public void drawUmbrella(int pplNum){
 		
 		if (head!= null && neck!= null){
