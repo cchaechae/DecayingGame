@@ -39,17 +39,12 @@ public class Umbrella {
 		
 		determineSize();
 		
+		app.strokeWeight(0.015f);
+		
 		//draw Umbrella body
 		app.stroke(colorPalette[pplNum]);
 		app.fill(colorPalette[pplNum]);
 		app.arc(head.x, head.y, size, size, 0, app.HALF_PI+app.HALF_PI);
-		
-
-		System.out.println("head" + head.x);
-		System.out.println("heady" + head.y);
-		
-		//draw Umbrella tip
-		app.line(head.x, head.y + radius , head.x, head.y + radius + 0.02f);
 		
 		//draw Umbrella tip
 		app.line(head.x, head.y + radius , head.x, head.y + radius + 0.02f);
