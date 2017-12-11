@@ -192,8 +192,6 @@ public class UrbanDecay extends PApplet{
 				u.drawUmbrella(numPpl);
 			}
 		}
-		
-		
 	}	
 	
 	/**
