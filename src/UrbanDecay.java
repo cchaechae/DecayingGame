@@ -158,6 +158,8 @@ public class UrbanDecay extends PApplet {
 		background(0);
 		strokeWeight(1);
 		setScale(ZOOM);
+		
+		if(!found){
 		for (int i = 0; i < 25; i++) {
 			rain[i].draw();
 			
@@ -173,6 +175,7 @@ public class UrbanDecay extends PApplet {
 		for (int i = 0; i < 200; i++) {
 			rainThree[i].draw();
 			
+		}
 		}
 	
 
@@ -256,35 +259,32 @@ public class UrbanDecay extends PApplet {
 				found = true;
 				for (int i = 0; i < 25; i++) {
 					rain[i].isUmbrella(found );
-					rain[i].setUmbrellaDimensions(b.getJoint(Body.HEAD).x,b.getJoint(Body.HEAD).y, 0.5f);
+					rain[i].setUmbrellaDimensions(u.getX(),u.getY(), 0.5f);
+					rain[i].draw();
 				}
 				for (int i = 0; i < 100; i++) {
 					rainOne[i].isUmbrella(found );
-					rainOne[i].setUmbrellaDimensions(b.getJoint(Body.HEAD).x,b.getJoint(Body.HEAD).y, 0.5f);
+					rainOne[i].setUmbrellaDimensions(u.getX(),u.getY(), 0.5f);
+					rainOne[i].draw();
 				}
 				for (int i = 0; i < 10; i++) {
 					rainTwo[i].isUmbrella(found );
-					rainTwo[i].setUmbrellaDimensions(b.getJoint(Body.HEAD).x,b.getJoint(Body.HEAD).y, 0.5f);
+					rainTwo[i].setUmbrellaDimensions(u.getX(),u.getY(), 0.5f);
+					rainTwo[i].draw();
 				}
 				for (int i = 0; i < 200; i++) {
 					rainThree[i].isUmbrella(found );
-					rainThree[i].setUmbrellaDimensions(b.getJoint(Body.HEAD).x,b.getJoint(Body.HEAD).y, 0.5f);
+					rainThree[i].setUmbrellaDimensions(u.getX(),u.getY(), 0.5f);
+					rainThree[i].draw();
 				}
 
 				
 			
 			}
-<<<<<<< HEAD
+
 		}
 	}	
-=======
 
-		
-		
-		}
-		}
-		
->>>>>>> origin/master
 	
 
 	/**
