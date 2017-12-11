@@ -33,7 +33,7 @@ public class Umbrella {
 		neck = body.getJoint(Body.NECK);
 	}
 	
-<<<<<<< HEAD
+
 	public float getX(){
 		
 		return head.x;
@@ -41,8 +41,7 @@ public class Umbrella {
 	public float getY(){
 		return head.y;
 	}
-=======
->>>>>>> 5b826c3b674f1590cddd020ba05d7ab888743e98
+
 	
 	public void drawUmbrella(int pplNum){
 		

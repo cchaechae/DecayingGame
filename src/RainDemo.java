@@ -111,8 +111,8 @@ public class RainDemo extends PApplet{
 
 		
 		for (int i = 0; i < rand ; i++) {
-			rain[i].isUmbrella(true);
-			rain[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
+			//rain[i].isUmbrella(true);
+			//rain[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
 			rain[i].draw();
 			
 		}

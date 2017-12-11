@@ -33,8 +33,6 @@ public class Rain {
 		}
 
 		y = y - s*mx ;
-	
-		System.out.println(y);
 		
 		x2 = x;
 		y2 = y + 0.08f;

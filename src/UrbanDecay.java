@@ -85,8 +85,8 @@ public class UrbanDecay extends PApplet {
 		// rain
 		rain = new Rain[25];
 		rainOne = new Rain[100];
-		rainTwo = new Rain[10];
-		rainThree = new Rain[200];
+		rainTwo = new Rain[50];
+		rainThree = new Rain[150];
 
 		for (int i = 0; i < 25; i++) {
 
@@ -100,13 +100,13 @@ public class UrbanDecay extends PApplet {
 
 		}
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 50; i++) {
 
 			rainTwo[i] = new Rain(this,  random(0f, 1f),  random(0, 1.5f),  random(0.2f, 0.4f));
 
 		}
 
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < 150; i++) {
 
 			rainThree[i] = new Rain(this,  random(1f, 2f), random(0, 1.5f),
 					random(0.2f, 0.4f));
@@ -167,11 +167,11 @@ public class UrbanDecay extends PApplet {
 			rainOne[i].draw();
 			
 		}
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 50; i++) {
 			rainTwo[i].draw();
 			
 		}
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < 150; i++) {
 			rainThree[i].draw();
 			
 		}
@@ -257,16 +257,12 @@ public class UrbanDecay extends PApplet {
 				for (int i = 0; i < 25; i++) {
 
 					rain[i].draw();
-<<<<<<< HEAD
 
-					rain[i].isUmbrella(found);
-					rain[i].setUmbrellaDimensions(u.getX(),u.getY(), 0.5f);
 
-=======
 					if (u.detectRain(rain[i].getX(), rain[i].getY())){
 						rain[i].setY(1.5f);
 					}
->>>>>>> 5b826c3b674f1590cddd020ba05d7ab888743e98
+
 				}
 				for (int i = 0; i < 100; i++) {
 					rainOne[i].draw();
@@ -274,13 +270,13 @@ public class UrbanDecay extends PApplet {
 						rainOne[i].setY(1.5f);
 					}
 				}
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < 50; i++) {
 					rainTwo[i].draw();
 					if (u.detectRain(rainTwo[i].getX(), rainTwo[i].getY())){
 						rainTwo[i].setY(1.5f);
 					}
 				}
-				for (int i = 0; i < 200; i++) {
+				for (int i = 0; i < 150; i++) {
 					rainThree[i].draw();
 					if (u.detectRain(rainThree[i].getX(), rainThree[i].getY())){
 						rainThree[i].setY(1.5f);
@@ -294,8 +290,6 @@ public class UrbanDecay extends PApplet {
 		}
 	}	
 
-
-	
 
 	/**
 	 * Draws an ellipse in the x,y position of the vector (it ignores z). Will
