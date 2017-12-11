@@ -174,8 +174,6 @@ public class UrbanDecay extends PApplet {
 			rainThree[i].draw();
 			
 		}
-	
-
 		
 
 		//strokeWeight(0.5f);
