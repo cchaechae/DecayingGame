@@ -35,11 +35,23 @@ public class Umbrella {
 		neck = body.getJoint(Body.NECK);
 	}
 	
+<<<<<<< HEAD
 	public void setColor(int pplNum){
 		
 		this.pplNum = pplNum;
 	}
 	
+=======
+
+	public float getX(){
+		
+		return head.x;
+	}
+	public float getY(){
+		return head.y;
+	}
+
+>>>>>>> origin/master
 	
 	public void drawUmbrella(){
 		
