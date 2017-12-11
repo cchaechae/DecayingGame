@@ -21,12 +21,15 @@ public class Building {
 	public Building(PApplet app, float xp, float yp, float w, float h){
 		this.app = app;
 		this.x = xp;
-		this.y = yp+0.1f;
+		this.y = yp;
 		this.width = w;
-		this.height = h-0.1f;
+		this.height = h;
 		roof = new PVector[2];
-		particles = new Particle[(int)((width/0.005f)*(height/0.005f))];
-		num = (int)(width/0.005f);
+//		particles = new Par[(int)((width/0.005f)*(height/0.005f))];
+		particles = new Particle[(int)((width/0.02f)*(height/0.005f))];
+
+//		num = (int)(width/0.005f);
+		num = (int)(width/0.02f);
 		row = 0;
 	}
 	
@@ -35,13 +38,12 @@ public class Building {
 	}
 	
 	public void initParticle(){
-		if(row > (int)(height/0.005f))
-			return;
-	
 		float x = 0f;
 		for(int j = 0; j < num; j++){
-			particles[j + (row*num)] = new Particle(app, getRoof()[0].x + x, getRoof()[0].y, app.color(app.random(0,255),app.random(0,255),app.random(0,255)));
-			x += 0.005f;
+			if(particles[j + (row*num)] == null){
+				particles[j + (row*num)] = new Particle(app, getRoof()[0].x + x, getRoof()[0].y, app.color(app.random(0,255),app.random(0,255),app.random(0,255)), y);
+				x += 0.02f;
+			}
 		}
 		row++;
 	}
@@ -56,16 +58,20 @@ public class Building {
 	}
 	
 	public void decay(){
-		height -= 0.005f; 
+		if(row < (int)(height/0.005f))
+			initParticle();
+		if(height >= 0.005f )
+			height -= 0.005f; 
+		particleFall();
 	}
 	
 	public float getWidth(){
 		return width;
 	}
 	
-	public void mouseClicked(){
+	public void particleFall(){
 		for(int j = 0; j < num; j++){
-			particles[j + ((row-1)*num)].mouseClicked();
+			particles[j + ((row-1)*num)].fall();
 		}
 	}
 	

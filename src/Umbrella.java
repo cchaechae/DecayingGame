@@ -10,17 +10,19 @@ public class Umbrella {
 	PVector head;
 	PVector neck;
 	int[] colorPalette;
+	int pplNum;
 	
 	public Umbrella(PApplet app){
 		
 		this.app = app;
 		radius = size/2;
 		colorPalette = new int [4];
+		pplNum = 0;
 		
 		//umbrella color
 		colorPalette[1]= app.color(164, 48, 37);
-		colorPalette[2] = app.color(98, 164, 128);
-		colorPalette[3] = app.color(98, 164, 216);
+		colorPalette[2] = app.color(81, 140, 160);
+		colorPalette[3] = app.color(98, 164, 128);
 		
 		//stick color
 		colorPalette[0] = app.color(63, 31, 142);
@@ -33,8 +35,13 @@ public class Umbrella {
 		neck = body.getJoint(Body.NECK);
 	}
 	
+	public void setColor(int pplNum){
+		
+		this.pplNum = pplNum;
+	}
 	
-	public void drawUmbrella(int pplNum){
+	
+	public void drawUmbrella(){
 		
 		if (head!= null && neck!= null){
 		
@@ -61,8 +68,8 @@ public class Umbrella {
 		app.strokeWeight(0.01f);
 		float umpTop = head.y + radius;
 		float divide = size/4;
-		app.line(head.x, umpTop, head.x + divide, head.y);
-		app.line(head.x, umpTop, head.x - divide, head.y);
+		//app.line(head.x, umpTop, head.x + divide, head.y);
+		//app.line(head.x, umpTop, head.x - divide, head.y);
 //		app.beginShape();
 //		head.x = head.x - 0.5f;
 //		head.y = head.y - 0.5f;

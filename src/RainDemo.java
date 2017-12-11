@@ -103,31 +103,30 @@ public class RainDemo extends PApplet{
 		arc(0.7f, 0.5f, 0.5f, 0.5f,0,HALF_PI+HALF_PI);
 
 		
-		for (int i = 0; i < 25 ; i++) {
-			rain[i].isUmbrella(true);
-			rain[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
-			rain[i].draw();
-			
-		}
-		for (int i = 0; i < 100 ; i++) {
-			rainOne[i].isUmbrella(true);
-			rainOne[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
-			rainOne[i].draw();
-			
-		}
-		for (int i = 0; i < 10 ; i++) {
-			rainTwo[i].isUmbrella(true);
-			rainTwo[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
-			rainTwo[i].draw();
-			
-		}
-		for (int i = 0; i < 200 ; i++) {
-			rainThree[i].isUmbrella(true);
-			rainThree[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
-			rainThree[i].draw();
-			
-		}
-		
+//		for (int i = 0; i < 25 ; i++) {
+//			rain[i].isUmbrella(true);
+//			rain[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
+//			rain[i].draw();
+//			
+//		}
+//		for (int i = 0; i < 100 ; i++) {
+//			rainOne[i].isUmbrella(true);
+//			rainOne[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
+//			rainOne[i].draw();
+//			
+//		}
+//		for (int i = 0; i < 10 ; i++) {
+//			rainTwo[i].isUmbrella(true);
+//			rainTwo[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
+//			rainTwo[i].draw();
+//			
+//		}
+//		for (int i = 0; i < 200 ; i++) {
+//			rainThree[i].isUmbrella(true);
+//			rainThree[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
+//			rainThree[i].draw();
+//		}
+//		
 		
 	}
 		

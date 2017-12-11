@@ -1,4 +1,3 @@
-
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -13,15 +12,17 @@ public class Particle {
 	float velocityY;
 	float velocityX = 0.001f;
 	PApplet app;
-	boolean clicked = false;
+	boolean fall = false;
 	int count;
 	boolean direction;
+	float bottom;
 	
-	public Particle(PApplet app, float x, float y, int clr){
+	public Particle(PApplet app, float x, float y, int clr, float bottom){
 		this.app = app;
 		location = new PVector(x,y);
 	    this.clr = clr;
-	    impatience = (int)app.random(0,25);
+	    this.bottom = bottom;
+	    impatience = (int)app.random(0,15);
 	    velocityY = app.random(0.002f, 0.01f);
 	    count = (int)app.random(10, 30);
 	    if((int)app.random(0,2) == 0)
@@ -30,14 +31,15 @@ public class Particle {
 	    	direction = true;
 	}
 	
-	public void mouseClicked(){
-		clicked = true;
+	public void fall(){
+		fall = true;
 	}
+	
 	
 	public void update(){
 		// it is moving
-		if(clicked){
-			if(location.y > -1.024f){
+		if(fall){
+			if(location.y > bottom){
 				if(impatience == 0)
 					location.y -= velocityY;
 				else
@@ -50,7 +52,6 @@ public class Particle {
 				}
 			}
 		}
-		//location.y = location.y + velocityY;
 		app.strokeWeight(0.005f);
 		app.stroke(clr);
 		app.point(location.x, location.y);

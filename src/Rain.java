@@ -5,7 +5,6 @@ public class Rain {
 	float x;
 	float y;
 	PApplet app;
-	float x2;
 	float y2;
 	float vel;
 	float s;
@@ -33,28 +32,17 @@ public class Rain {
 		}
 
 		y = y - s*mx ;
-	
-		System.out.println(y);
 		
-		x2 = x;
-		y2 = y + 0.08f;
+		y2 = y + 0.05f;
 
 		app.stroke(200);
 		app.strokeWeight(0.005f);
-		app.line(x, y, x2, y2);
-		
-		if (y <= -1.5f) {
-			app.noFill();
-			//app.stroke(200);
-			///app.ellipse(x, app.height - app.random(50, 70), app.random(25, 100), 10);
-			y = 1.5f;
-		}
-
+		app.line(x, y, x, y2);
 	}
 
 
 	public float getX() {
-		return x2;
+		return x;
 	}
 
 	public float getY() {
@@ -62,9 +50,13 @@ public class Rain {
 	}
 
 	public void setY(float y) {
-		// TODO Auto-generated method stub
 		this.y = y;
-		y2 = y + 0.15f;
+		y2 = y + 0.05f;
+		this.x = app.random(-2f, 2f);
+	}
+	
+	public void setX(float x) {
+		this.x = x;
 	}
 
 }
