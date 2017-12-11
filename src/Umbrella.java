@@ -5,7 +5,7 @@ public class Umbrella {
 	
 	Body body;
 	float radius;
-	float size = 0.5f;
+	float size = 0.75f;
 	PApplet app;
 	PVector head;
 	PVector neck;
@@ -33,6 +33,7 @@ public class Umbrella {
 		neck = body.getJoint(Body.NECK);
 	}
 	
+<<<<<<< HEAD
 	public float getX(){
 		
 		return head.x;
@@ -40,6 +41,8 @@ public class Umbrella {
 	public float getY(){
 		return head.y;
 	}
+=======
+>>>>>>> 5b826c3b674f1590cddd020ba05d7ab888743e98
 	
 	public void drawUmbrella(int pplNum){
 		
@@ -90,15 +93,18 @@ public class Umbrella {
 	 * returns true if the umbrella detects the rain
 	 * @return
 	 */
-	public boolean detectRain(int x, int y){
+	public boolean detectRain(float x, float y){
 		
 		//get the rain coordinates (location)
 		//determines if the rain is in the range of radius from head center
-		float d = PApplet.dist(x, y, head.x, head.y);
+		if (head!=null){
+			float d = PApplet.dist(x, y, head.x, head.y);
 		
-		if (d <= radius) return true;
+			if (d <= radius) return true;
+		}
 		
 		return false;
 	}
+
 	
 }
