@@ -175,14 +175,8 @@ public class UrbanDecay extends PApplet {
 			rainThree[i].draw();
 			
 		}
-<<<<<<< HEAD
-=======
 		}
 	
-
->>>>>>> origin/master
-		
-
 		//strokeWeight(0.5f);
 
 
@@ -253,40 +247,40 @@ public class UrbanDecay extends PApplet {
 		for (Body b : tracker.getPeople().values()) {
 			Umbrella u = umbrellas.get(b.getId());
 			numPpl++;
+			PVector head = b.getJoint(Body.HEAD);
 
 			if (u != null && b != null){
 
 				u.update(b);
-				u.drawUmbrella(numPpl);
 				found = true;
+				
 				for (int i = 0; i < 25; i++) {
 
-					rain[i].isUmbrella(found );
-					rain[i].setUmbrellaDimensions(u.getX(),u.getY(), 0.5f);
 					rain[i].draw();
-
-					rain[i].isUmbrella(found);
-					rain[i].setUmbrellaDimensions(b.getJoint(Body.HEAD).x,b.getJoint(Body.HEAD).y, 0.5f);
-
+					if (u.detectRain(rain[i].getX(), rain[i].getY())){
+						rain[i].setY(1.5f);
+					}
 				}
 				for (int i = 0; i < 100; i++) {
-					rainOne[i].isUmbrella(found );
-					rainOne[i].setUmbrellaDimensions(u.getX(),u.getY(), 0.5f);
 					rainOne[i].draw();
+					if (u.detectRain(rainOne[i].getX(), rainOne[i].getY())){
+						rainOne[i].setY(1.5f);
+					}
 				}
 				for (int i = 0; i < 10; i++) {
-					rainTwo[i].isUmbrella(found );
-					rainTwo[i].setUmbrellaDimensions(u.getX(),u.getY(), 0.5f);
 					rainTwo[i].draw();
+					if (u.detectRain(rainTwo[i].getX(), rainTwo[i].getY())){
+						rainTwo[i].setY(1.5f);
+					}
 				}
 				for (int i = 0; i < 200; i++) {
-					rainThree[i].isUmbrella(found );
-					rainThree[i].setUmbrellaDimensions(u.getX(),u.getY(), 0.5f);
 					rainThree[i].draw();
+					if (u.detectRain(rainThree[i].getX(), rainThree[i].getY())){
+						rainThree[i].setY(1.5f);
+					}
 				}
 
-				
-			
+				u.drawUmbrella(numPpl);
 			}
 
 
