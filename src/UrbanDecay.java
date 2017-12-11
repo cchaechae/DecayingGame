@@ -249,7 +249,7 @@ public class UrbanDecay extends PApplet {
 			Umbrella u = umbrellas.get(b.getId());
 			numPpl++;
 
-			if (u != null){
+			if (u != null && b != null){
 
 				u.update(b);
 				u.drawUmbrella(numPpl);
