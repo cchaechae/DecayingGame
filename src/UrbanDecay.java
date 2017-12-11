@@ -274,12 +274,17 @@ public class UrbanDecay extends PApplet {
 				
 			
 			}
+<<<<<<< HEAD
+		}
+	}	
+=======
 
 		
 		
 		}
 		}
 		
+>>>>>>> origin/master
 	
 
 	/**
