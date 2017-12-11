@@ -260,7 +260,7 @@ public class UrbanDecay extends PApplet {
 				u.drawUmbrella(numPpl);
 				found = true;
 				for (int i = 0; i < 25; i++) {
-					rain[i].isUmbrella(found );
+					rain[i].isUmbrella(found);
 					rain[i].setUmbrellaDimensions(b.getJoint(Body.HEAD).x,b.getJoint(Body.HEAD).y, 0.5f);
 				}
 				for (int i = 0; i < 100; i++) {
@@ -279,17 +279,9 @@ public class UrbanDecay extends PApplet {
 				
 			
 			}
-<<<<<<< HEAD
 		}
 	}	
-=======
-
 		
-		
-		}
-		}
-		
->>>>>>> origin/master
 	
 
 	/**
