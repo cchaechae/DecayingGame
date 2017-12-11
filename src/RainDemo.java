@@ -60,27 +60,28 @@ public class RainDemo extends PApplet{
 		int secWidth = windowWidth/4;
 		System.out.println(windowWidth);
 		
-		//int rand = getRandom(arr);
 		for (int i = 0; i < 25; i++) {
-			
-		
-			rain[i] = new Rain(this, (int)random(0 ,240), (int)random(0, this.height), (int)random(2, 4));
-		
+
+			rain[i] = new Rain(this,  random(-2f, -1f),random(0, 1.5f), random(0.2f, 0.4f));
+
 		}
-		
+
 		for (int i = 0; i < 100; i++) {
-			
-			rainOne[i] = new Rain(this, (int)random( 240, 480), (int)random(0, this.height), (int)random(2, 4));
+
+			rainOne[i] = new Rain(this, random(-1f, 0f),  random(0, 1.5f),random(0.2f, 0.4f));
+
 		}
-	
+
 		for (int i = 0; i < 10; i++) {
-			
-			rainTwo[i] = new Rain(this, (int)random(480, 720), (int)random(0, this.height), (int)random(2, 4));
+
+			rainTwo[i] = new Rain(this,  random(0f, 1f),  random(0, 1.5f),  random(0.2f, 0.4f));
+
 		}
-		
+
 		for (int i = 0; i < 200; i++) {
-			
-			rainThree[i] = new Rain(this, (int)random(720, this.width), (int)random(0, this.height), (int)random(2, 4));
+
+			rainThree[i] = new Rain(this,  random(1f, 2f), random(0, 1.5f),
+					random(0.2f, 0.4f));
 		}
 
 	}
@@ -99,35 +100,32 @@ public class RainDemo extends PApplet{
 		
 		fill(204, 102, 0);
 		
-		arc(0f, 0f, 0.5f, 0.5f, PI,2*PI);
-		
-	
-		
-	
-		
-		
-		System.out.println(PI);
+		arc(0.7f, 0.5f, 0.5f, 0.5f,0,HALF_PI+HALF_PI);
+
 		
 		for (int i = 0; i < 25 ; i++) {
-			
-			rain[i].draw();
 			rain[i].isUmbrella(true);
-			rain[i].setUmbrellaDimensions(300,400,250);
+			rain[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
+			rain[i].draw();
+			
 		}
 		for (int i = 0; i < 100 ; i++) {
-			rainOne[i].draw();
 			rainOne[i].isUmbrella(true);
-			rainOne[i].setUmbrellaDimensions(300,400,250);
+			rainOne[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
+			rainOne[i].draw();
+			
 		}
 		for (int i = 0; i < 10 ; i++) {
-			rainTwo[i].draw();
 			rainTwo[i].isUmbrella(true);
-			rainTwo[i].setUmbrellaDimensions(300,400,250);
+			rainTwo[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
+			rainTwo[i].draw();
+			
 		}
 		for (int i = 0; i < 200 ; i++) {
-			rainThree[i].draw();
 			rainThree[i].isUmbrella(true);
-			rainThree[i].setUmbrellaDimensions(300,400,250);
+			rainThree[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
+			rainThree[i].draw();
+			
 		}
 		
 		
