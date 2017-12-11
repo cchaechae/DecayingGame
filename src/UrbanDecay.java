@@ -160,7 +160,6 @@ public class UrbanDecay extends PApplet {
 		setScale(ZOOM);
 		for (int i = 0; i < 25; i++) {
 			rain[i].draw();
-			
 		}
 		for (int i = 0; i < 100; i++) {
 			rainOne[i].draw();
