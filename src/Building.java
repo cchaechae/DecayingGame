@@ -41,7 +41,7 @@ public class Building {
 		float x = 0f;
 		for(int j = 0; j < num; j++){
 			if(particles[j + (row*num)] == null){
-				particles[j + (row*num)] = new Particle(app, getRoof()[0].x + x, getRoof()[0].y, app.color(app.random(0,255),app.random(0,255),app.random(0,255)), y);
+				particles[j + (row*num)] = new Particle(app, getRoof()[0].x + x, getRoof()[0].y, app.color(app.random(0,255),app.random(0,255),app.random(0,255)));
 				x += 0.02f;
 			}
 		}
@@ -54,6 +54,10 @@ public class Building {
 				break;
 			else
 				particles[i].update();
+			
+			if( particles[i].location.y <= y ){
+				particles[i].stop();
+			}
 		}
 	}
 	

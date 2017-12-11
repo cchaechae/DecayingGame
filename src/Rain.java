@@ -51,8 +51,7 @@ public class Rain {
 
 	public void setY(float y) {
 		this.y = y;
-		y2 = y + 0.05f;
-		this.x = app.random(-2f, 2f);
+		y2 = y + 0.15f;
 	}
 	
 	public void setX(float x) {

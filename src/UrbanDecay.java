@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import processing.core.PApplet;
+import processing.core.PVector;
 
 public class UrbanDecay extends PApplet {
 
@@ -65,7 +66,7 @@ public class UrbanDecay extends PApplet {
 	}
 
 	public void settings() {
-		createWindow(false, true, .5f);
+		createWindow(false, false, .5f);
 	}
 
 	public void setup() {
@@ -73,50 +74,21 @@ public class UrbanDecay extends PApplet {
 		try {
 			kinectReader = new KinectBodyDataProvider("exitTest.kinect", 10);
 		} catch (IOException e) {
-			System.out.println("Unable to create kinect producer");
+			System.out.println("Unable to creat e kinect producer");
 		}
-		//kinectReader = new KinectBodyDataProvider(8008);
+		// kinectReader = new KinectBodyDataProvider(8008);
 		kinectReader.start();
+
 		
 		// rain
-<<<<<<< HEAD
 		rain = new Rain[NUM_RAIN];
 
 		for (int i = 0; i < NUM_RAIN; i++) {
-=======
-		rain = new Rain[25];
-		rainOne = new Rain[100];
-		rainTwo = new Rain[50];
-		rainThree = new Rain[150];
-
-		for (int i = 0; i < 25; i++) {
-
-			rain[i] = new Rain(this,  random(-2f, -1f),random(0, 1.5f), random(0.2f, 0.4f));
-
-		}
-
-		for (int i = 0; i < 100; i++) {
-
-			rainOne[i] = new Rain(this, random(-1f, 0f),  random(0, 1.5f),random(0.2f, 0.4f));
-
-		}
-
-		for (int i = 0; i < 50; i++) {
->>>>>>> origin/master
 
 			rain[i] = new Rain(this,  random(-2f, 2f),random(0, 1.5f), random(0.2f, 0.4f));
 
 		}
 
-<<<<<<< HEAD
-=======
-		for (int i = 0; i < 150; i++) {
-
-			rainThree[i] = new Rain(this,  random(1f, 2f), random(0, 1.5f),
-					random(0.2f, 0.4f));
-		}
-
->>>>>>> origin/master
 		// white buildings
 		whiteBuilding[0] = new Building(this, -1.55f, bottom+ground, 0.13f, 0.1f);
 		whiteBuilding[1] = new Building(this, -1.3f, bottom+ground, 0.21f, 0.37f);
@@ -157,13 +129,8 @@ public class UrbanDecay extends PApplet {
 		darkBuilding[5] = new Building(this, 1.1f, bottom+ground, 0.53f, .65f);
 	}
 
-	/**
-	 * rain goes back to the top if rain touches the building
-	 * @param r
-	 */
 	public void touchBuilding(Rain r){
 		
-<<<<<<< HEAD
 		for(int i = 0; i < NUM_WHITE_BUILDING; i++){
 			if(whiteBuilding[i].getRoof()[0].x <= r.getX() && r.getX() <= whiteBuilding[i].getRoof()[1].x && r.getY() <= whiteBuilding[i].getRoof()[0].y){
 				whiteBuilding[i].decay();
@@ -176,23 +143,6 @@ public class UrbanDecay extends PApplet {
 				greyBuilding[i].decay();
 				r.setY(1.5f);
 			}
-=======
-		if(!found){
-		for (int i = 0; i < 25; i++) {
-			rain[i].draw();
-		}
-		for (int i = 0; i < 100; i++) {
-			rainOne[i].draw();
-			
-		}
-		for (int i = 0; i < 50; i++) {
-			rainTwo[i].draw();
-			
-		}
-		for (int i = 0; i < 150; i++) {
-			rainThree[i].draw();
-			
->>>>>>> origin/master
 		}
 		
 		for(int i = 0; i < NUM_DARK_BUILDING; i++){
@@ -214,11 +164,9 @@ public class UrbanDecay extends PApplet {
 		rect(-2f, bottom, 4f, ground);
 
 		strokeWeight(1);
-		//if(!found){
 			for (int i = 0; i < NUM_RAIN; i++) {
 				rain[i].draw();
 			}
-		//}
 
 		int numPpl = 0;
 		
@@ -250,7 +198,7 @@ public class UrbanDecay extends PApplet {
 			whiteBuilding[i].drawParticle();
 		}
 		
-
+		
 		for (int i = 0; i < NUM_RAIN; i++) {
 			touchBuilding(rain[i]);
 			// if raindrop touches ground
@@ -269,83 +217,35 @@ public class UrbanDecay extends PApplet {
 			Umbrella umbrella =  new Umbrella(this);
 
 			umbrellas.put(id, umbrella);
-			//numPpl++;
 		}
 
 		for (Long id : tracker.getExits()) {
 			umbrellas.remove(id);
-			//numPpl--;
 		}
 
-		//the rain goes back to the top (disappears) when it touches the umbrella
 		for (Body b : tracker.getPeople().values()) {
 			Umbrella u = umbrellas.get(b.getId());
-			
 			numPpl++;
-			u.setColor(numPpl);
 
 			if (u != null && b != null){
 
 				u.update(b);
-				found = true;
 				
 				for (int i = 0; i < NUM_RAIN; i++) {
 
 					rain[i].draw();
-
-
 					if (u.detectRain(rain[i].getX(), rain[i].getY())){
 						rain[i].setY(1.5f);
 					}
-
 				}
-<<<<<<< HEAD
 				
-				u.drawUmbrella();
-=======
-				for (int i = 0; i < 100; i++) {
-					rainOne[i].draw();
-					if (u.detectRain(rainOne[i].getX(), rainOne[i].getY())){
-						rainOne[i].setY(1.5f);
-					}
-				}
-				for (int i = 0; i < 50; i++) {
-					rainTwo[i].draw();
-					if (u.detectRain(rainTwo[i].getX(), rainTwo[i].getY())){
-						rainTwo[i].setY(1.5f);
-					}
-				}
-				for (int i = 0; i < 150; i++) {
-					rainThree[i].draw();
-					if (u.detectRain(rainThree[i].getX(), rainThree[i].getY())){
-						rainThree[i].setY(1.5f);
-					}
-				}
-
 				u.drawUmbrella(numPpl);
->>>>>>> origin/master
 			}
+
+
 		}
-<<<<<<< HEAD
 
 	}	
-=======
-	}	
-
-
-	/**
-	 * Draws an ellipse in the x,y position of the vector (it ignores z). Will
-	 * do nothing is vec is null. This is handy because get joint will return
-	 * null if the joint isn't tracked.
-	 * 
-	 * @param vec
-	 */
-	public void drawIfValid(PVector vec) {
-		if (vec != null) {
-			ellipse(vec.x, vec.y, .1f, .1f);
-		}
-	}
->>>>>>> origin/master
 
 	public static void main(String[] args) {
 		PApplet.main(UrbanDecay.class.getName());

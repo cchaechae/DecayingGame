@@ -110,21 +110,18 @@ public class RainDemo extends PApplet{
 		int rand = (int) (100 + (Math.random() * (400  - 100)));
 
 		
-<<<<<<< HEAD
 //		for (int i = 0; i < 25 ; i++) {
 //			rain[i].isUmbrella(true);
 //			rain[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
 //			rain[i].draw();
 //			
 //		}
-=======
-		for (int i = 0; i < rand ; i++) {
+//		for (int i = 0; i < rand ; i++) {
 			//rain[i].isUmbrella(true);
 			//rain[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
-			rain[i].draw();
+//			rain[i].draw();
 			
-		}
->>>>>>> origin/master
+//		}
 //		for (int i = 0; i < 100 ; i++) {
 //			rainOne[i].isUmbrella(true);
 //			rainOne[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
@@ -141,14 +138,12 @@ public class RainDemo extends PApplet{
 //			rainThree[i].isUmbrella(true);
 //			rainThree[i].setUmbrellaDimensions(0.7f,0.5f,0.5f);
 //			rainThree[i].draw();
-<<<<<<< HEAD
+
 //		}
 //		
-=======
 //			
 //		}
 		
->>>>>>> origin/master
 		
 	}
 		
