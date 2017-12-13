@@ -275,7 +275,6 @@ public class UrbanDecay extends PApplet {
 				
 				for (int i = 0; i < NUM_RAIN; i++) {
 
-					//rain[i].draw();
 					if (u.detectRain(rain[i].getX(), rain[i].getY())){
 						rain[i].setY(1.5f);
 						
