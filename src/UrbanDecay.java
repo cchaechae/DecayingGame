@@ -1,5 +1,7 @@
 import java.io.IOException;
+
 import java.util.HashMap;
+import java.util.Random;
 
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -85,7 +87,7 @@ public class UrbanDecay extends PApplet {
 
 		for (int i = 0; i < NUM_RAIN; i++) {
 
-			rain[i] = new Rain(this,  random(-2f, 2f),random(0, 1.5f), random(0.2f, 0.4f));
+			rain[i] = new Rain(this,random(-2f,2f),random(0, 1.5f), random(0.2f, 0.4f));
 
 		}
 
@@ -135,6 +137,7 @@ public class UrbanDecay extends PApplet {
 			if(whiteBuilding[i].getRoof()[0].x <= r.getX() && r.getX() <= whiteBuilding[i].getRoof()[1].x && r.getY() <= whiteBuilding[i].getRoof()[0].y){
 				whiteBuilding[i].decay();
 				r.setY(1.5f);
+				r.setX(random(0f,0.5f));
 			}
 		}
 		
@@ -142,6 +145,7 @@ public class UrbanDecay extends PApplet {
 			if(greyBuilding[i].getRoof()[0].x <= r.getX() && r.getX() <= greyBuilding[i].getRoof()[1].x && r.getY() <= greyBuilding[i].getRoof()[0].y){
 				greyBuilding[i].decay();
 				r.setY(1.5f);
+				r.setX(random(-0.5f,0f));
 			}
 		}
 		
@@ -149,8 +153,27 @@ public class UrbanDecay extends PApplet {
 			if(darkBuilding[i].getRoof()[0].x <= r.getX() && r.getX() <= darkBuilding[i].getRoof()[1].x && r.getY() <= darkBuilding[i].getRoof()[0].y){
 				darkBuilding[i].decay();
 				r.setY(1.5f);
+				float x2 = random(0.2f,0.9f);
+				float x3 = random(1.5f,2f);
+
+
+				 Random random = new Random();
+					float e = random.nextBoolean() ? x3 : x2;
+				
+			
+				if(e == x2){
+					rain[i].setX(x2);
+					
+				}
+				else {
+					
+					rain[i].setX(x3);
+					
+				}
 			}
 		}
+		
+		
 	}
 	
 	public void draw() {
@@ -204,6 +227,25 @@ public class UrbanDecay extends PApplet {
 			// if raindrop touches ground
 			if (rain[i].getY() <= bottom + ground) {
 				rain[i].setY(1.5f); 
+				
+				float	x1 =random(-1f,0f);
+				float x2 = random(0.2f,0.9f);
+
+				 Random random = new Random();
+					float d = random.nextBoolean() ? x1 : x2;
+				
+			
+				if(d == x1){
+					rain[i].setX(x1);
+					
+				}
+				else {
+					
+					rain[i].setX(x2);
+					
+				}
+				
+			
 			}
 		
 		}
@@ -233,9 +275,23 @@ public class UrbanDecay extends PApplet {
 				
 				for (int i = 0; i < NUM_RAIN; i++) {
 
-					rain[i].draw();
+					//rain[i].draw();
 					if (u.detectRain(rain[i].getX(), rain[i].getY())){
 						rain[i].setY(1.5f);
+						
+						
+				
+							float	x1 =random(1f,2f);
+							float x2 = random(-2f,-1f);
+							 Random randomno = new Random();
+							float c = randomno.nextBoolean() ? x1 : x2;
+							if(c == x1){
+								rain[i].setX(x1);
+							}
+							else {
+								
+								rain[i].setX(x2);
+							}
 					}
 				}
 				

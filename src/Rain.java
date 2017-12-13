@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import processing.core.PApplet;
 
 public class Rain {
@@ -11,11 +13,20 @@ public class Rain {
 	float centerX;
 	float centerY;
 	float radius;
+	float x1;
+	float x2; 
+	float x3;
+	float x4;
+	
 	
 	boolean umbrella = false;
 	
 
-	public Rain(PApplet app, float x, float y, float sp) {
+	public Rain(PApplet app,float x, float y, float sp) {
+		
+		
+
+		
 
 		this.x = x;
 		this.y = y;
@@ -25,7 +36,29 @@ public class Rain {
 	}
 
 	public void draw( ) {
-
+//		Random rand = new Random();
+//
+//		x1 = rand.nextFloat() * (-1f - (-2f))  - 2f;
+//		x2 = rand.nextFloat() * (0f - (-1f))  - 1f;
+//		x3 = rand.nextFloat() * (1f - (0f)) + 0f;
+//		x4 = rand.nextFloat() * (2f - (1f)) + 1f;
+//
+//		int randomNum = (int) (Math.random() * (4 - 1) + 1);
+//		if(randomNum == 1){
+//			x = x1;
+//		}
+//		else if(randomNum == 2){
+//			x = x2;
+//		}
+//		else if(randomNum == 3){
+//			x = x3;
+//		}
+//		else if(randomNum == 4){
+//			x = x4;
+//		}
+//		
+//		
+		
 		float mx = 0;
 		if (mx <= 0) {
 			mx = 0.2f;
@@ -38,6 +71,13 @@ public class Rain {
 		app.stroke(200);
 		app.strokeWeight(0.005f);
 		app.line(x, y, x, y2);
+		
+		
+		
+	
+		
+	
+		
 	}
 
 
