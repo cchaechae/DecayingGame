@@ -24,10 +24,6 @@ public class Rain {
 
 	public Rain(PApplet app,float x, float y, float sp) {
 		
-		
-
-		
-
 		this.x = x;
 		this.y = y;
 		this.s = sp;
@@ -69,15 +65,8 @@ public class Rain {
 		y2 = y + 0.05f;
 
 		app.stroke(200);
-		app.strokeWeight(0.005f);
+		app.strokeWeight(0.002f);
 		app.line(x, y, x, y2);
-		
-		
-		
-	
-		
-	
-		
 	}
 
 
