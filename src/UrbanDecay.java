@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 public class UrbanDecay extends PApplet {
@@ -39,6 +40,9 @@ public class UrbanDecay extends PApplet {
 	Building[] darkBuilding = new Building[NUM_DARK_BUILDING];
 	boolean found = false;
 
+	PImage imgBackground;
+	
+	
 	KinectBodyDataProvider kinectReader;
 	Rain[] rain;
 
@@ -68,7 +72,10 @@ public class UrbanDecay extends PApplet {
 	}
 
 	public void settings() {
-		createWindow(false, false, .5f);
+		createWindow(false, true, .5f);
+		
+		imgBackground = loadImage("backimg.jpeg");
+		imgBackground.resize(displayWidth, displayHeight);
 	}
 
 	public void setup() {
@@ -178,7 +185,12 @@ public class UrbanDecay extends PApplet {
 	
 	public void draw() {
 		background(0);
+		//setScale(.5f);
+		noStroke();
+		background(imgBackground);
 		
+		noStroke();
+		//background(imgBackground);
 		setScale(ZOOM);
 		
 		fill(255, 255, 255);

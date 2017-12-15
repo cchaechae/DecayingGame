@@ -35,6 +35,7 @@ public class Building {
 	
 	public void draw(){
 		app.rect(x, y, width, height);
+		
 	}
 	
 	public void initParticle(){
