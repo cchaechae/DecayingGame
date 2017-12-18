@@ -8,12 +8,22 @@ import processing.core.PVector;
 
 public class UrbanDecay extends PApplet {
 
-	// float radx; // Radius
-	// float rady;
-	// float angle1; // angle
-	// float x; // result
-	// float y;
-	// float minus = 0.05f;
+	float radx; // Radius
+	float rady;
+	float angle1; // angle
+	float x; // result
+	float y;
+	float minus = 0.05f;
+	final static int NUM_PARTICLE = 1000;
+	//final static int NUM_BUILDING = 10;
+
+	final static int NUM_WHITE_BUILDING = 14;
+	final static int NUM_GREY_BUILDING = 13;
+	final static int NUM_DARK_BUILDING = 6;
+
+	int numPpl;
+
+
 	final static int NUM_BUILDING = 17;
 
 	final static float ZOOM = 0.5f;
@@ -70,6 +80,8 @@ public class UrbanDecay extends PApplet {
 
 	public void setup() {
 
+		numPpl = 0;
+
 		try {
 			kinectReader = new KinectBodyDataProvider("exitTest.kinect", 10);
 		} catch (IOException e) {
@@ -118,7 +130,7 @@ public class UrbanDecay extends PApplet {
 					&& r.getY() <= building[i].getRoof()[0].y) {
 				building[i].decay();
 				r.setY(1.5f);
-				
+
 			}
 		}
 
@@ -127,7 +139,7 @@ public class UrbanDecay extends PApplet {
 					&& r.getY() <= building[i].getRoof()[0].y) {
 				building[i].decay();
 				r.setY(1.5f);
-				
+
 			}
 		}
 
@@ -140,37 +152,31 @@ public class UrbanDecay extends PApplet {
 				float x3 = random(-2f, -1f);
 				float x1 = random(-1f, 0f);
 				float x4 = random(0f, 1f);
-				
 
-				
 				Random random = new Random();
-				
+
 				int e = random.nextInt(3 - 0 + 1) + 0;
 
 				if (e == 0) {
 					rain[i].setX(x3);
-				
 
-				} 
-				else if(e == 1){
+				} else if (e == 1) {
 					rain[i].setX(x4);
-					
-				}
-				else if(e == 2){
+
+				} else if (e == 2) {
 					rain[i].setX(x1);
-				
-				}	
-				
+
+				}
+
 				else {
-					
+
 					rain[i].setX(x2);
-				
 
 				}
 			}
 		}
 	}
-	
+
 	public void draw() {
 
 		setScale(ZOOM);
@@ -217,12 +223,10 @@ public class UrbanDecay extends PApplet {
 
 				if (d == x1) {
 					rain[i].setX(x1);
-					
 
 				} else {
 
 					rain[i].setX(x2);
-					
 
 				}
 
@@ -234,52 +238,65 @@ public class UrbanDecay extends PApplet {
 		KinectBodyData bodyData = kinectReader.getData();
 		tracker.update(bodyData);
 
-		// detecting multiple users
-		for (Long id : tracker.getEnters()) {
+//		// detecting multiple users
+//		for (Long id : tracker.getEnters()) {
+//
+//			// UMBRELLA FIX COLOR CHANGES
+//			if (umbrellas.size() < 1) {
+//
+//				Umbrella umbrella = new Umbrella(this);
+//
+//				umbrellas.put(id, umbrella);
+//			}
+
 			
-			//UMBRELLA FIX COLOR CHANGES
-			if (umbrellas.size() < 1) {
-				
-				Umbrella umbrella = new Umbrella(this);
+			 //detecting multiple users
+			 for (Long id: tracker.getEnters()){
+			 Umbrella umbrella = new Umbrella(this);
+			 umbrellas.put(id, umbrella);
+			 numPpl++;
+			 umbrella.setColor(numPpl);
+			 System.out.println("enter id: " + id);
+			
+			 }
 
-				umbrellas.put(id, umbrella);
+			for (Long id1 : tracker.getExits()) {
+				umbrellas.remove(id1);
+				numPpl--;
 			}
-		}
 
-		for (Long id : tracker.getExits()) {
-			umbrellas.remove(id);
-		}
+			for (Body b : tracker.getPeople().values()) {
+				Umbrella u = umbrellas.get(b.getId());
+				// numPpl++;
 
-		for (Body b : tracker.getPeople().values()) {
-			Umbrella u = umbrellas.get(b.getId());
-			numPpl++;
+				if (u != null && b != null) {
 
-			if (u != null && b != null) {
+					u.update(b);
 
-				u.update(b);
+					for (int i = 0; i < NUM_RAIN; i++) {
 
-				for (int i = 0; i < NUM_RAIN; i++) {
+						if (u.detectRain(rain[i].getX(), rain[i].getY())) {
+							rain[i].setY(1.5f);
 
-					if (u.detectRain(rain[i].getX(), rain[i].getY())) {
-						rain[i].setY(1.5f);
+							float x1 = random(0f, 1f);
+							float x2 = random(-2f, -1f);
+							Random randomno = new Random();
+							float c = randomno.nextBoolean() ? x1 : x2;
+							if (c == x2) {
 
-						float x1 = random(0f, 1f);
-						float x2 = random(-2f, -1f);
-						Random randomno = new Random();
-						float c = randomno.nextBoolean() ? x1 : x2;
-						if (c == x2) {
-							
-							rain[i].setX(x2);
-						} else {
-						
-							rain[i].setX(x1);
+								rain[i].setX(x2);
+							} else {
+
+								rain[i].setX(x1);
+							}
 						}
+
+						u.drawUmbrella(numPpl);
+						// System.out.println("u color: "+ u.getColor());
 					}
+
 				}
-
-				u.drawUmbrella(numPpl);
-			}
-
+			
 		}
 
 	}
