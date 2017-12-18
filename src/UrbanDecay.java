@@ -18,6 +18,8 @@ public class UrbanDecay extends PApplet {
 	final static int NUM_WHITE_BUILDING = 14;
 	final static int NUM_GREY_BUILDING = 13;
 	final static int NUM_DARK_BUILDING = 6;
+	
+	int numPpl;
 
 	final static float ZOOM = 0.5f;
 
@@ -70,6 +72,8 @@ public class UrbanDecay extends PApplet {
 	}
 
 	public void setup() {
+		
+		numPpl = 0;
 
 		try {
 			kinectReader = new KinectBodyDataProvider("exitTest.kinect", 10);
@@ -168,7 +172,7 @@ public class UrbanDecay extends PApplet {
 				rain[i].draw();
 			}
 
-		int numPpl = 0;
+		//int numPpl = 0;
 		
 		fill(50, 50, 50);
 		for (int i = 0; i < NUM_DARK_BUILDING; i++) {
@@ -205,7 +209,6 @@ public class UrbanDecay extends PApplet {
 			if (rain[i].getY() <= bottom + ground) {
 				rain[i].setY(1.5f); 
 			}
-		
 		}
 		
 		// KinectBodyData bodyData = kinectReader.getMostRecentData();
@@ -215,17 +218,20 @@ public class UrbanDecay extends PApplet {
 		//detecting multiple users
 		for (Long id: tracker.getEnters()){
 			Umbrella umbrella =  new Umbrella(this);
-
 			umbrellas.put(id, umbrella);
+			numPpl++;
+			umbrella.setColor(numPpl);
+			System.out.println("enter id: " + id);
 		}
 
 		for (Long id : tracker.getExits()) {
 			umbrellas.remove(id);
+			numPpl--;
 		}
 
 		for (Body b : tracker.getPeople().values()) {
 			Umbrella u = umbrellas.get(b.getId());
-			numPpl++;
+			//numPpl++;
 
 			if (u != null && b != null){
 
@@ -238,8 +244,8 @@ public class UrbanDecay extends PApplet {
 						rain[i].setY(1.5f);
 					}
 				}
-				
 				u.drawUmbrella(numPpl);
+				System.out.println("u color: "+ u.getColor());
 			}
 
 
