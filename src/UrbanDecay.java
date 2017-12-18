@@ -1,11 +1,14 @@
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Random;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 public class UrbanDecay extends PApplet {
 
+<<<<<<< HEAD
 	float radx; // Radius
 	float rady;
 	float angle1; // angle
@@ -20,6 +23,15 @@ public class UrbanDecay extends PApplet {
 	final static int NUM_DARK_BUILDING = 6;
 	
 	int numPpl;
+=======
+//	float radx; // Radius
+//	float rady;
+//	float angle1; // angle
+//	float x; // result
+//	float y;
+//	float minus = 0.05f;
+	final static int NUM_BUILDING = 17;
+>>>>>>> origin/master
 
 	final static float ZOOM = 0.5f;
 
@@ -32,13 +44,12 @@ public class UrbanDecay extends PApplet {
 	HashMap<Long, Umbrella> umbrellas = new HashMap<Long, Umbrella>();
 
 	Building[] building = new Building[NUM_BUILDING];
-	Particle[] field = new Particle[NUM_PARTICLE];
 
-	Building[] whiteBuilding = new Building[NUM_WHITE_BUILDING];
-	Building[] greyBuilding = new Building[NUM_GREY_BUILDING];
-	Building[] darkBuilding = new Building[NUM_DARK_BUILDING];
-	boolean found = false;
+//	boolean found = false;
 
+	PImage imgBackground;
+	
+	
 	KinectBodyDataProvider kinectReader;
 	Rain[] rain;
 
@@ -68,7 +79,13 @@ public class UrbanDecay extends PApplet {
 	}
 
 	public void settings() {
-		createWindow(false, false, .5f);
+		createWindow(false, true, .5f);
+<<<<<<< HEAD
+		
+		imgBackground = loadImage("backimg.jpeg");
+		imgBackground.resize(displayWidth, displayHeight);
+=======
+>>>>>>> f6c81b44d258e4295e73de0dafbc40b805857f80
 	}
 
 	public void setup() {
@@ -89,83 +106,107 @@ public class UrbanDecay extends PApplet {
 
 		for (int i = 0; i < NUM_RAIN; i++) {
 
-			rain[i] = new Rain(this,  random(-2f, 2f),random(0, 1.5f), random(0.2f, 0.4f));
+			rain[i] = new Rain(this,random(-2f,2f),random(0, 1.5f), random(0.2f, 0.4f));
 
 		}
 
-		// white buildings
-		whiteBuilding[0] = new Building(this, -1.55f, bottom+ground, 0.13f, 0.1f);
-		whiteBuilding[1] = new Building(this, -1.3f, bottom+ground, 0.21f, 0.37f);
-		whiteBuilding[2] = new Building(this, -0.95f, bottom+ground, 0.05f, 0.28f);
-		whiteBuilding[3] = new Building(this, -0.9f, bottom+ground, 0.3f, 0.33f);
-		whiteBuilding[4] = new Building(this, -0.6f, bottom+ground, 0.05f, 0.28f);
-		whiteBuilding[5] = new Building(this, -0.4f, bottom+ground, 0.24f, 0.69f);
-		whiteBuilding[6] = new Building(this, -0.161f, bottom+ground, 0.161f, 0.15f);
-		whiteBuilding[7] = new Building(this, 0f, bottom+ground, 0.08f, 0.82f);
-		whiteBuilding[8] = new Building(this, 0.079f, bottom+ground, 0.102f, 0.95f);
-		whiteBuilding[9] = new Building(this, 0.18f, bottom+ground, 0.08f, 0.82f);
-		whiteBuilding[10] = new Building(this, 0.35f, bottom+ground, 0.35f, 0.5f);
-		whiteBuilding[11] = new Building(this, 0.8f, bottom+ground, 0.21f, 0.3f);
-		whiteBuilding[12] = new Building(this, 1.25f, bottom+ground, 0.14f, 0.15f);
-		whiteBuilding[13] = new Building(this, 1.43f, bottom+ground, 0.13f, 0.07f);
+		building[0] = new Building(this, -1.55f, bottom+ground, 0.1f, 0.12f);
+		building[1] = new Building(this, -1.3f, bottom+ground, 0.13f, 0.37f);
+		building[2] = new Building(this, -1.1f, bottom+ground, 0.12f, 0.28f);
+		building[3] = new Building(this, -0.9f, bottom+ground, 0.2f, 0.62f);
+		building[4] = new Building(this, -0.6f, bottom+ground, 0.11f, 0.58f);
+		building[5] = new Building(this, -0.49f, bottom+ground, 0.09f, 0.38f);
+		building[6] = new Building(this, -0.4f, bottom+ground, 0.14f, 0.79f);
+		building[7] = new Building(this, -0.161f, bottom+ground, 0.16f, 0.65f);
+		building[8] = new Building(this, 0f, bottom+ground, 0.1f, 1.25f);
+		building[9] = new Building(this, 0.13f, bottom+ground, 0.13f, 0.99f);
+		building[10] = new Building(this, 0.25f, bottom+ground, 0.13f, 0.3f);
+		building[11] = new Building(this, 0.38f, bottom+ground, 0.26f, 0.82f);
+		building[12] = new Building(this, 0.65f, bottom+ground, 0.2f, 0.5f);
+		building[13] = new Building(this, 0.9f, bottom+ground, 0.13f, 0.3f);
+		building[14] = new Building(this, 1.02f, bottom+ground, 0.23f, 0.12f);
+		building[15] = new Building(this, 1.25f, bottom+ground, 0.12f, 0.45f);
+		building[16] = new Building(this, 1.43f, bottom+ground, 0.1f, 0.13f);
+		
+		for (int i = 0; i < NUM_BUILDING; i++) {
+			building[i].initParticle();
+		}
 
-		// grey buildings
-		greyBuilding[0] = new Building(this, -1.8f, bottom+ground, 0.32f, 0.35f);
-		greyBuilding[1] = new Building(this, -1.2f, bottom+ground, 0.25f, 0.7f);
-		greyBuilding[2] = new Building(this, -0.7f, bottom+ground, 0.25f, 0.48f);
-		greyBuilding[3] = new Building(this, -0.3f, bottom+ground, 0.03f, 1f);
-		greyBuilding[4] = new Building(this, -0.271f, bottom+ground, 0.08f, 1.1f);
-		greyBuilding[5] = new Building(this, -0.192f, bottom+ground, 0.024f, 1.35f);
-		greyBuilding[6] = new Building(this, -0.17f, bottom+ground, 0.081f, 1.1f);
-		greyBuilding[7] = new Building(this, -0.09f, bottom+ground, 0.03f, 1f);
-		greyBuilding[8] = new Building(this, 0.1f, bottom+ground, 0.35f, 1.05f);
-		greyBuilding[9] = new Building(this, 0.65f, bottom+ground, 0.3f, 0.75f);
-		greyBuilding[10] = new Building(this, 1.3f, bottom+ground, 0.3f, 0.37f);
-		greyBuilding[11] = new Building(this, 1.5f, bottom+ground, 0.2f, 0.19f);
-		greyBuilding[12] = new Building(this, 1.8f, bottom+ground, 0.15f, 0.1f);
-
-		// dark grey buildings
-		darkBuilding[0] = new Building(this, -1.5f, bottom+ground, 0.22f, 0.67f);
-		darkBuilding[1] = new Building(this, -1f, bottom+ground, 0.22f, 1.05f);
-		darkBuilding[2] = new Building(this, -0.5f, bottom+ground, 0.25f, 1.15f);
-		darkBuilding[3] = new Building(this, 0f, bottom+ground, 0.4f, 1.25f);
-		darkBuilding[4] = new Building(this, 0.6f, bottom+ground, 0.18f, 0.95f);
-		darkBuilding[5] = new Building(this, 1.1f, bottom+ground, 0.53f, .65f);
 	}
 
 	public void touchBuilding(Rain r){
 		
-		for(int i = 0; i < NUM_WHITE_BUILDING; i++){
-			if(whiteBuilding[i].getRoof()[0].x <= r.getX() && r.getX() <= whiteBuilding[i].getRoof()[1].x && r.getY() <= whiteBuilding[i].getRoof()[0].y){
-				whiteBuilding[i].decay();
+		for(int i = 0; i < 5; i++){
+			if(building[i].getRoof()[0].x <= r.getX() && r.getX() <= building[i].getRoof()[1].x && r.getY() <= building[i].getRoof()[0].y){
+				building[i].decay();
 				r.setY(1.5f);
+				r.setX(random(0f,0.5f));
 			}
 		}
 		
-		for(int i = 0; i < NUM_GREY_BUILDING; i++){
-			if(greyBuilding[i].getRoof()[0].x <= r.getX() && r.getX() <= greyBuilding[i].getRoof()[1].x && r.getY() <= greyBuilding[i].getRoof()[0].y){
-				greyBuilding[i].decay();
+		for(int i = 5; i < 10; i++){
+			if(building[i].getRoof()[0].x <= r.getX() && r.getX() <= building[i].getRoof()[1].x && r.getY() <= building[i].getRoof()[0].y){
+				building[i].decay();
 				r.setY(1.5f);
+				r.setX(random(-0.5f,0f));
 			}
 		}
 		
-		for(int i = 0; i < NUM_DARK_BUILDING; i++){
-			if(darkBuilding[i].getRoof()[0].x <= r.getX() && r.getX() <= darkBuilding[i].getRoof()[1].x && r.getY() <= darkBuilding[i].getRoof()[0].y){
-				darkBuilding[i].decay();
+		for(int i = 10; i < NUM_BUILDING; i++){
+			if(building[i].getRoof()[0].x <= r.getX() && r.getX() <= building[i].getRoof()[1].x && r.getY() <= building[i].getRoof()[0].y){
+				building[i].decay();
 				r.setY(1.5f);
+				float x2 = random(0.2f,0.9f);
+				float x3 = random(1.5f,2f);
+
+
+				 Random random = new Random();
+					float e = random.nextBoolean() ? x3 : x2;
+				
+			
+				if(e == x2){
+					rain[i].setX(x2);
+					
+				}
+				else {
+					
+					rain[i].setX(x3);
+					
+				}
 			}
 		}
+		
+		
 	}
 	
+<<<<<<< HEAD
 	public void draw() {
 		background(0);
+		//setScale(.5f);
+		noStroke();
+		background(imgBackground);
 		
+		noStroke();
+		//background(imgBackground);
+=======
+	public void draw() {	
+>>>>>>> f6c81b44d258e4295e73de0dafbc40b805857f80
 		setScale(ZOOM);
 		
-		fill(255, 255, 255);
+		// white background
+//		background(255);		
+//		stroke(0);
+		
+		//black background
+		background(0);		
+		stroke(255);
+
+		strokeWeight(0.002f);
 		// ground
-		noStroke();
-		rect(-2f, bottom, 4f, ground);
+		line(-2f, bottom+ground, 2f, bottom+ground);
+		
+		
+		fill(255, 255, 255);
 
 		strokeWeight(1);
 			for (int i = 0; i < NUM_RAIN; i++) {
@@ -174,32 +215,11 @@ public class UrbanDecay extends PApplet {
 
 		//int numPpl = 0;
 		
-		fill(50, 50, 50);
-		for (int i = 0; i < NUM_DARK_BUILDING; i++) {
-			noStroke();
-			darkBuilding[i].draw();
-			if(mousePressed){
-				darkBuilding[i].initParticle();
-			}
-			darkBuilding[i].drawParticle();
-		}
-
-		fill(120, 120, 120);
-		for (int i = 0; i < NUM_GREY_BUILDING; i++) {
-			noStroke();
-			greyBuilding[i].draw();
-			if(mousePressed){
-				greyBuilding[i].initParticle();
-			}
-			greyBuilding[i].drawParticle();
-		}
-
 		fill(255, 255, 255);
 		// white buildings
-		for (int i = 0; i < NUM_WHITE_BUILDING; i++) {
+		for (int i = 0; i < NUM_BUILDING; i++) {
 			noStroke();
-			whiteBuilding[i].draw();
-			whiteBuilding[i].drawParticle();
+			building[i].draw();
 		}
 		
 		
@@ -208,6 +228,25 @@ public class UrbanDecay extends PApplet {
 			// if raindrop touches ground
 			if (rain[i].getY() <= bottom + ground) {
 				rain[i].setY(1.5f); 
+				
+				float	x1 =random(-1f,0f);
+				float x2 = random(0.2f,0.9f);
+
+				 Random random = new Random();
+					float d = random.nextBoolean() ? x1 : x2;
+				
+			
+				if(d == x1){
+					rain[i].setX(x1);
+					
+				}
+				else {
+					
+					rain[i].setX(x2);
+					
+				}
+				
+			
 			}
 		}
 		
@@ -239,9 +278,20 @@ public class UrbanDecay extends PApplet {
 				
 				for (int i = 0; i < NUM_RAIN; i++) {
 
-					rain[i].draw();
 					if (u.detectRain(rain[i].getX(), rain[i].getY())){
 						rain[i].setY(1.5f);
+				
+							float	x1 =random(1f,2f);
+							float x2 = random(-2f,-1f);
+							 Random randomno = new Random();
+							float c = randomno.nextBoolean() ? x1 : x2;
+							if(c == x1){
+								rain[i].setX(x1);
+							}
+							else {
+								
+								rain[i].setX(x2);
+							}
 					}
 				}
 				u.drawUmbrella(numPpl);

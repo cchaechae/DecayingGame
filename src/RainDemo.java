@@ -67,7 +67,7 @@ public class RainDemo extends PApplet{
 		
 		for (int i = 0; i < 400; i++) {
 
-			rain[i] = new Rain(this,  random(-1f, 2f),random(0, 1.5f), random(0.2f, 0.4f));
+			//rain[i] = new Rain(this,random(0, 1.5f), random(0.2f, 0.4f));
 
 		}
 
