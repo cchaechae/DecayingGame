@@ -41,25 +41,25 @@ public class Building {
 	}
 	
 	public void draw(){
-<<<<<<< HEAD
-		app.rect(x, y, width, height);
-		
-	}
-	
-	public void initParticle(){
-		float x = 0f;
-		for(int j = 0; j < num; j++){
-			if(particles[j + (row*num)] == null){
-				particles[j + (row*num)] = new Particle(app, getRoof()[0].x + x, getRoof()[0].y, app.color(app.random(0,255),app.random(0,255),app.random(0,255)));
-				x += 0.02f;
-			}
-		}
-		row++;
-	}
-	
-	public void drawParticle(){
-=======
->>>>>>> f6c81b44d258e4295e73de0dafbc40b805857f80
+//<<<<<<< HEAD
+//		app.rect(x, y, width, height);
+//		
+//	}
+//	
+//	public void initParticle(){
+//		float x = 0f;
+//		for(int j = 0; j < num; j++){
+//			if(particles[j + (row*num)] == null){
+//				particles[j + (row*num)] = new Particle(app, getRoof()[0].x + x, getRoof()[0].y, app.color(app.random(0,255),app.random(0,255),app.random(0,255)));
+//				x += 0.02f;
+//			}
+//		}
+//		row++;
+//	}
+//	
+//	public void drawParticle(){
+//=======
+//>>>>>>> f6c81b44d258e4295e73de0dafbc40b805857f80
 		for (int i=0; i < particles.length; i++) {
 			if(particles[i] == null)
 				break;
